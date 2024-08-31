@@ -1,0 +1,113 @@
+/* Global styles*/
+
+body{
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  
+  /* Navbar */
+  
+  .App-header{
+    width: 100%;
+    background-color: #003b95;
+    height:25rem;
+  }
+
+  .logo{
+    width: 80%;
+    margin-left: 8.5%;
+  }
+
+  .logo-image{
+    width: 20rem;
+  }
+  
+  nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+  .links-container {
+    display: flex;
+    align-items: center;
+    height: 4rem;
+  }
+  
+  .link{
+    color:white;
+    font-size: 1.5rem;
+    padding: 1rem;
+  }
+
+  .icon-container {
+    display: flex;
+    align-items: center;
+    height: 4rem;
+  }
+
+  i{
+    font-size: 2rem;
+  }
+
+  .subheader{
+    width: 78%;
+    margin-left: 11%;
+    margin-right: 10%;
+    font-family: Helvetica, Arial, sans-serif;
+    color: white;
+    font-size:2rem;
+  }
+
+  .subheader h6{
+    margin-top:-1rem;
+  }
+
+  /* Search bar component*/
+
+  .form-inline {
+    display: flex;
+    width: 100%;
+    background-color:#ffb700;
+    height: 3.5rem;
+  }
+
+  .searchbar{
+    display: flex; 
+    align-items: center; 
+    width: 80%;
+    margin-left:10%;
+    margin-right:10%;
+    height: 100%;
+    gap:10px;
+  }
+
+
+  .btn-outline-light{
+    height: 100%;
+    width:20%;
+    font-size: 1.5rem;
+  }
+
+  .guests-box{
+    width:15%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .search-bar-blue {
+    flex: 1; /* Makes the input take up the remaining space */
+    min-width: 0; /* Prevents overflow */
+    height: 100%;
+    width:100%;
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.5rem;
+  }
+
+
