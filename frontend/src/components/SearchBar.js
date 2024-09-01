@@ -9,15 +9,14 @@ function SearchBar() {
 
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
-  const [open, setOpen] = useState(false);
   const [guests, setGuests] = useState(1);
-  const datePickerRef = useRef(null);
+
 
   // Date function for date input, toISOString() returns the date in YYYY-MM-DD, parameter accepted by input
   let today = new Date();
   let localeDate = today.toISOString().split('T')[0];
 
-  
+
 
   return (
   <>

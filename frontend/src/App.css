@@ -150,6 +150,54 @@ body{
     width: 2.5rem;
   }
 
+  /** Media queries for search bar*/
+
+  @media (max-width: 860px) {
+
+    .App-header{
+      height: 15rem;
+      font-size: 0.2rem;
+    }
+    .subheader{
+      display: none;
+    }
+
+    .form-inline {
+      display: flex;
+      width: 100%;
+      background-color:#ffb700;
+      height: 100%;
+    }
+
+    .searchbar{
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 5%;
+    }
+
+    .search-bar-blue{
+      font-size: 1.2rem;
+    }
+
+    .date-input{
+      width: 100%;
+      height: 30%;
+      font-size: 1rem;
+    }
+
+    .guests-box{
+      width: 100%;
+    }
+
+    .btn-outline-light{
+      width: 100%;
+    }
+  }
+
+  /** Media queries end*/
+
+
 
 
 
