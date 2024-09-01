@@ -34,6 +34,15 @@ function App() {
             <Route path="/login" element={<Login />} />
           </Routes>
         </body>
+        <footer>
+          <div className='row'>
+            <div class="about">
+              <h3>About us:</h3>
+              <p>We offer the best booking services for hotels, flights, and car rentals. Explore the world with us at unbeatable prices.</p>
+              <p>&copy; 2024 BookingSite. All rights reserved.</p>
+            </div>
+          </div>
+        </footer>
       </div>
     </Router>
   );

@@ -195,9 +195,52 @@ body{
     }
   }
 
-  /** Media queries end*/
+  /** Media queries search bar end*/
+
+  /* Explore component**/
+
+  .grid-container{
+    display: grid;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    grid-template-columns: 1fr;
+  }
+
+  /** Carousel styles*/
+
+  .carousel-slide {
+    padding: 0 10px; /* Add space between slides */
+    
+  }
+  
+  .carousel-slide img {
+    width: 60%; /* Ensure image takes full width of the slide */
+    height: 140%; /* Maintain aspect ratio */
+    border-radius: 5%;
+  }
+  
+  .carousel .slide {
+    display: flex; /* Flexbox layout */
+    justify-content: center; /* Center align slide content */
+  }
 
 
 
 
+/* Footer **/
 
+footer{
+  background-color: #003b95;
+  height: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about{
+  font-family: 'Booking';
+  text-align: center;
+  width: 100%;
+  color: white;
+}

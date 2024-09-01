@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-
+import Explore from './Explore';
+import ViewProperties from './ViewProperties';
 
 
 
@@ -10,6 +11,8 @@ function SearchBar() {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [guests, setGuests] = useState(1);
+
+  const [isSearch, setIsSearch] = useState(false);
 
 
   // Date function for date input, toISOString() returns the date in YYYY-MM-DD, parameter accepted by input
@@ -52,6 +55,9 @@ function SearchBar() {
           <button className="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
         </div>
     </form>
+    {/** If user is searching, show properties, else show explore setion */}
+    {!isSearch && <Explore/>}
+    {isSearch && <ViewProperties/>}
   </>
   )
 }

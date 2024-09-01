@@ -10,11 +10,16 @@
     "bootstrap": "^5.3.3",
     "postcss": "^8.4.41",
     "react": "^18.3.1",
+    "react-bootstrap": "^2.10.4",
     "react-datepicker": "^7.3.0",
     "react-day-picker": "^9.0.8",
     "react-dom": "^18.3.1",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.1.12",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
