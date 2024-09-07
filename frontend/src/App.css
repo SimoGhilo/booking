@@ -201,28 +201,40 @@ body{
 
   .grid-container{
     display: grid;
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
     grid-template-columns: 1fr;
+    margin-bottom: 5rem;
   }
+
 
   /** Carousel styles*/
 
   .carousel-slide {
-    padding: 0 10px; /* Add space between slides */
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   
   .carousel-slide img {
-    width: 60%; /* Ensure image takes full width of the slide */
-    height: 140%; /* Maintain aspect ratio */
+    width: auto; /* Image maintains its aspect ratio */
+    height: 180px;
     border-radius: 5%;
   }
   
   .carousel .slide {
     display: flex; /* Flexbox layout */
     justify-content: center; /* Center align slide content */
+    align-items: center;
+    width: 95%; /* Adjust slide width */
+  }
+
+  .carousel .legend{
+    left:30%;
+    width:50%;
+    /** todo: fix writing*/
   }
 
 
