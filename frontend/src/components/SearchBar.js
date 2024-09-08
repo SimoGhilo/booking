@@ -129,7 +129,7 @@ function SearchBar() {
             )
           }
     {/** If user is searching, show properties, else show explore setion */}
-    {!isSearch && <Explore/>}
+    {!isSearch && <Explore/> /*** TODO: Pass down date and preview to submit the form */} 
     {isSearch && <ViewProperties properties={properties}/>}
   </>
   )
