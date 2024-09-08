@@ -205,7 +205,9 @@ body{
     margin-left: 10%;
     margin-right: 10%;
     grid-template-columns: 1fr;
+    grid-row-gap: 4rem;
     margin-bottom: 5rem;
+    margin-top: 2rem;
   }
 
 
@@ -237,6 +239,109 @@ body{
 
   }
 
+  /** Carousel media queries*/
+
+  @media (max-width: 768px) {
+    .carousel{
+      display: none;
+    }
+
+    .box .title{
+      display: none;
+    }
+  }
+
+  /*  End carousel **/
+
+  .flex-box-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .card-v{
+    text-align: center;
+  }
+
+  .card-h{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    height: 100%;
+
+  }
+
+  .big-text{
+    font-size: 1.8rem;
+  }
+
+  .title{
+    font-size: 2.5rem;
+  }
+
+  .overlay-text{
+    font-size: 1.8rem;
+    position: relative;
+    bottom:25rem;
+    font-family: 'Booking';
+  }
+
+  
+  .img-card-v{
+    width:18rem;
+    border-radius: 5%;
+  }
+
+  .img-card-h{
+    width:25rem;
+    height: 16.5rem;
+    border-radius: 5%;
+  }
+
+
+    /** explore media queries*/
+
+    @media (max-width: 768px) {
+  
+      .title{
+        margin-top: -3rem;
+        font-size: 1.5rem;
+      }
+
+      .flex-box-row{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+  
+      .img-card-v{
+        margin-top: -3rem;
+        width:17rem;
+        border-radius: 5%;
+      }
+    
+      .img-card-h{
+        width:19rem;
+        height: 14.5rem;
+        border-radius: 5%;
+      }
+
+      .big-text{
+        font-size: 1rem;
+      }
+
+      .overlay-text{
+        font-size: 1rem;
+      }
+
+
+    }
+
+
 
 
 
@@ -255,4 +360,15 @@ footer{
   text-align: center;
   width: 100%;
   color: white;
+}
+
+/* Footer media queries**/
+
+@media (max-width: 768px) {
+  .about{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 0.75rem;
+  }
 }
