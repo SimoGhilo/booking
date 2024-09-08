@@ -1,6 +1,9 @@
 import React from 'react'
 
-function ViewProperties() {
+function ViewProperties(props) {
+
+  console.log(props.properties);
+  
   return (
     <div>ViewProperties</div>
   )

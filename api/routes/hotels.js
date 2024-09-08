@@ -15,15 +15,15 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
-    try {
-      const [rows] = await pool.query(`SELECT * FROM hotels WHERE id = ${req.params.id}`);
-      res.json(rows);
-    } catch (error) {
-      console.error('Error fetching hotels:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  });
+// router.get('/:id', async (req, res) => {
+//     try {
+//       const [rows] = await pool.query(`SELECT * FROM hotels WHERE id = ${req.params.id}`);
+//       res.json(rows);
+//     } catch (error) {
+//       console.error('Error fetching hotels:', error);
+//       res.status(500).json({ error: 'Internal Server Error' });
+//     }
+//   });
 
   router.get('/name/:name', async (req, res) => {
     try {
@@ -36,10 +36,12 @@ router.get('/:id', async (req, res) => {
     }
   });
 
-  router.get('/city/:city_id', async (req, res) => {
+  router.get('/city/:name', async (req, res) => {
     try {
-      const searchTerm = `${req.params.city_id}`;
-      const [rows] = await pool.query(`SELECT * FROM hotels WHERE city_id = ?`, [searchTerm]);
+      const searchTerm = `${req.params.name}`;
+      const [rows] = await pool.query(`SELECT * FROM booking.hotels
+LEFT JOIN cities ON hotels.city_id = cities.id
+WHERE cities.name LIKE '%${searchTerm}%'`);
       res.json(rows);
     } catch (error) {
       console.error('Error fetching hotels:', error);
