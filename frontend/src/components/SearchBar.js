@@ -14,6 +14,7 @@ function SearchBar() {
   const [guests, setGuests] = useState(1);
 
   const [isSearch, setIsSearch] = useState(false);
+  const [preview, setPreview] = useState([]);
 
   const [properties, setProperties] = useState([]);
 
@@ -23,9 +24,11 @@ function SearchBar() {
   let localeDate = today.toISOString().split('T')[0];
 
 
+  /** Fetch properties by city i.e. search term */
+
+
   async function fetchPropertiesByCity(searchString)
   {
-    /**TODO: fetch API  */
 
     try {
       let res = await fetch(`http://localhost:5000/api/hotels/city/${searchString}`);
@@ -48,6 +51,32 @@ function SearchBar() {
   }
 
 
+  /** fetch cities to preview them to the user in the searchbar */
+
+
+  function fetchPreview(searchTerm){
+
+    fetch(`http://localhost:5000/api/cities/${searchTerm}`).
+    then((resJson)=> {
+      return resJson.json();
+    }).then((res)=> {
+      setPreview(res);
+    }).catch((err)=> console.log(err));
+
+  }
+
+
+  useEffect(()=> {
+    if(searchTerm.length >= 3)
+      {
+        let resCities = fetchPreview(searchTerm)  
+        setPreview(resCities)
+      } else {
+        setPreview([])
+      }
+  }, [searchTerm]);
+
+
 
 
   return (
@@ -58,6 +87,18 @@ function SearchBar() {
             event.preventDefault();
             setSearchTerm(event.currentTarget.value);
           }}/>
+          {
+            preview && preview.length > 0 && (
+              <>
+                {preview.map((p) => (
+                  <div className='boxPreview' key={p.name}>
+                    <h2>{p.name}</h2>
+                    <small>{p.country}</small>
+                  </div>
+                ))}
+              </>
+            )
+          }
           <input type='date' className='date-input' min={localeDate} onChange={(event) => {
             event.preventDefault();
             setStartDate(event.currentTarget.value);

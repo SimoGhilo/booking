@@ -65,11 +65,14 @@ app.use(require('cors')());
 
 /** Routes files */
 const hotelsRouter = require('./routes/hotels');
+const citiesRouter = require('./routes/cities');
 
 
 /** Routes */
 
 app.use('/api/hotels', hotelsRouter);
+
+app.use('/api/cities', citiesRouter);
 
 // Start server
 app.listen(port, () => {
