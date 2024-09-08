@@ -232,9 +232,9 @@ body{
   }
 
   .carousel .legend{
-    left:30%;
     width:50%;
-    /** todo: fix writing*/
+    background: #003b95;
+
   }
 
 
