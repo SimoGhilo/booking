@@ -87,18 +87,6 @@ function SearchBar() {
             event.preventDefault();
             setSearchTerm(event.currentTarget.value);
           }}/>
-          {
-            preview && preview.length > 0 && (
-              <>
-                {preview.map((p) => (
-                  <div className='boxPreview' key={p.name}>
-                    <h2>{p.name}</h2>
-                    <small>{p.country}</small>
-                  </div>
-                ))}
-              </>
-            )
-          }
           <input type='date' className='date-input' min={localeDate} onChange={(event) => {
             event.preventDefault();
             setStartDate(event.currentTarget.value);
@@ -128,6 +116,18 @@ function SearchBar() {
           <button className="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
         </div>
     </form>
+    {
+            preview && preview.length > 0 && (
+              <>
+                {preview.map((p) => (
+                  <div className='boxPreview' key={p.name}>
+                    <h2><a>{p.name}</a></h2>
+                    <span>{p.country}</span>
+                  </div>
+                ))}
+              </>
+            )
+          }
     {/** If user is searching, show properties, else show explore setion */}
     {!isSearch && <Explore/>}
     {isSearch && <ViewProperties properties={properties}/>}
