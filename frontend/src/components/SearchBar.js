@@ -12,19 +12,37 @@ function SearchBar() {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [guests, setGuests] = useState(1);
-
   const [isSearch, setIsSearch] = useState(false);
   const [preview, setPreview] = useState([]);
-
   const [properties, setProperties] = useState([]);
+
+  /** Date stuff */
 
 
   // Date function for date input, toISOString() returns the date in YYYY-MM-DD, parameter accepted by input
   let today = new Date();
-  let localeDate = today.toISOString().split('T')[0];
+  let localeDateStart = today.toISOString().split('T')[0];
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+  let localeDateEnd =  tomorrow.toISOString().split('T')[0];
+
+  // Ensure the end date is always after the start date
+  useEffect(() => {
+    if (startDate && endDate && endDate < startDate) {
+      setEndDate('');
+    }
+  }, [startDate, endDate]);
+
+  // Helper function to get startDate + 1 day for endDate min
+  const getMinEndDate = (startDate) => {
+    const date = new Date(startDate);
+    date.setDate(date.getDate() + 1);
+    return date.toISOString().split('T')[0];
+  };
 
 
-  /** Fetch properties by city i.e. search term */
+
+  /** API calls, fetch data */
 
 
   async function fetchPropertiesByCity(searchString)
@@ -52,6 +70,7 @@ function SearchBar() {
 
 
   /** fetch cities to preview them to the user in the searchbar */
+    /** Preview search term */
 
 
   function fetchPreview(searchTerm){
@@ -87,11 +106,12 @@ function SearchBar() {
             event.preventDefault();
             setSearchTerm(event.currentTarget.value);
           }}/>
-          <input type='date' className='date-input' min={localeDate} onChange={(event) => {
+          <input type='date' className='date-input' min={localeDateStart} value={startDate || ''} onChange={(event) => {
             event.preventDefault();
             setStartDate(event.currentTarget.value);
           }}/>
-          <input type='date' className='date-input' onChange={(event) => {
+          <input type='date' className='date-input' min={startDate ? getMinEndDate(startDate) : localeDateEnd}
+            value={endDate || ''} onChange={(event) => {
             event.preventDefault();
             setEndDate(event.currentTarget.value);
           }}/>
@@ -129,8 +149,8 @@ function SearchBar() {
             )
           }
     {/** If user is searching, show properties, else show explore setion */}
-    {!isSearch && <Explore/> /*** TODO: Pass down date and preview to submit the form */} 
-    {isSearch && <ViewProperties properties={properties}/>}
+    {!isSearch && <Explore/>} 
+    {isSearch && <ViewProperties startDate={startDate} endDate={endDate} properties={properties} guests={guests}/>}
   </>
   )
 }
