@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react'
 
 function ViewProperties(props) {
 
+  /** local state */
+
+  const [properties, setProperties] = useState([]);
+
   console.log(props);
 
   /** Date stuff */
@@ -34,12 +38,52 @@ function ViewProperties(props) {
 
 
 
-  /*** APIs, fetch all properties for the search term passed down */
+/*** APIs, fetch all properties for the search term passed down */
+
+/** helper function to get the properties by searchTerm */
+
+async function fetchProperties(searchTerm) {
+  let resJson = await fetch(`http://localhost:5000/api/hotels/city/${searchTerm}`);
+  let res = await resJson.json();
+  return res;
+}
+
+useEffect(() => {
+  const getProperties = async () => {
+    setProperties(await fetchProperties(props.searchTerm));
+  };
+  
+  getProperties();
+}, [props.searchTerm]);
+
+
 
   
-  
   return (
-    <div className='container'></div>
+    <div className='grid-box'>
+
+        <section className='grid-section' id="sidebar">
+          <h4>Filters</h4>
+        </section>
+
+        <section className='grid-section' id="main-content">
+          <h2>{props.searchTerm}: {properties.length} properties found</h2>
+          {properties.map((p)=> (
+            <>
+            {console.log(p)}
+              <h1>{p.name}</h1>
+              <div className='card-property'>
+                <img src={p.src}/>
+                <p>{p.description}</p>
+              </div>
+            </>
+          ))}
+          <div>
+            {/** TODO: filters, src in DB , style and media queries */}
+
+        </div>
+      </section>
+    </div>
   )
 }
 

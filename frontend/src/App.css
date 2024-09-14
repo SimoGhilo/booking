@@ -370,6 +370,40 @@ body{
 
     }
 
+    /*End explore media queries*/
+
+    /* View Properties component*/
+
+    .grid-box{
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      grid-gap:2rem;
+    }
+
+    .grid-section{
+      width: 100%;
+    }
+
+    #sidebar{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ffb700;
+    }
+
+    /* #main-content{
+
+    } */
+
+    .card-property{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+
+
 
 
 
