@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Explore from './Explore';
 import ViewProperties from './ViewProperties';
+import { Link } from 'react-router-dom';
 
 
 
@@ -8,13 +9,14 @@ function SearchBar() {
 
   /**Local state */
 
-  const [searchTerm, setSearchTerm] = useState('');
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  const [searchTerm, setSearchTerm] = useState(''); // Set funct also in child component (ViewProperties.js)
+  const [startDate, setStartDate] = useState(); // Set funct also in child component (ViewProperties.js)
+  const [endDate, setEndDate] = useState(); // Set funct also in child component (ViewProperties.js)
   const [guests, setGuests] = useState(1);
   const [isSearch, setIsSearch] = useState(false);
-  const [preview, setPreview] = useState([]);
+  const [preview, setPreview] = useState([]); 
   const [properties, setProperties] = useState([]);
+  const [hidePreview, setHidePreview] = useState(false); // Set funct also in child component (ViewProperties.js)
 
   /** Date stuff */
 
@@ -102,7 +104,7 @@ function SearchBar() {
   <>
     <form className="form-inline my-2 my-lg-0" id='formSearch' onSubmit={handleSubmit}>
         <div className='searchbar'>
-          <input className="form-control mr-sm-2 search-bar-blue" type="search" placeholder="Where are you going ?" aria-label="Search" onChange={(event) => {
+          <input className="form-control mr-sm-2 search-bar-blue" value={searchTerm} type="search" placeholder="Where are you going ?" aria-label="Search" onChange={(event) => {
             event.preventDefault();
             setSearchTerm(event.currentTarget.value);
           }}/>
@@ -137,10 +139,10 @@ function SearchBar() {
         </div>
     </form>
     {
-            preview && preview.length > 0 && (
+            !hidePreview && preview && preview.length > 0 && (
               <>
                 {preview.map((p) => (
-                  <div className='boxPreview' key={p.name}>
+                  <div className='boxPreview' onClick={()=> {setIsSearch(true); setSearchTerm(p.name); setHidePreview(true);}} key={p.name}>
                     <h2><a>{p.name}</a></h2>
                     <span>{p.country}</span>
                   </div>
@@ -150,7 +152,7 @@ function SearchBar() {
           }
     {/** If user is searching, show properties, else show explore setion */}
     {!isSearch && <Explore/>} 
-    {isSearch && <ViewProperties startDate={startDate} endDate={endDate} properties={properties} guests={guests}/>}
+    {isSearch && <ViewProperties searchTerm={searchTerm} startDate={startDate} endDate={endDate} properties={properties} guests={guests} hidePreview={hidePreview} setHidePreview={setHidePreview} setStartDate={setStartDate} setEndDate={setEndDate}/>}
   </>
   )
 }

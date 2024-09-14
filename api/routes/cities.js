@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 
     let searchTerm = req.params.name
     try {
-      const [rows] = await pool.query(`SELECT name,country FROM cities WHERE name LIKE '%${searchTerm}%' OR  country LIKE '%${searchTerm}%'`);
+      const [rows] = await pool.query(`SELECT name,country, id FROM cities WHERE name LIKE '%${searchTerm}%' OR  country LIKE '%${searchTerm}%'`);
       res.json(rows);
     } catch (error) {
       console.error('Error fetching cities:', error);
