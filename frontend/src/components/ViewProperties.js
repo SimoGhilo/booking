@@ -98,7 +98,7 @@ useEffect(()=> {
             </>
           ))}
           <div>
-            {/** TODO: filters, src in DB , style and media queries  */}
+            {/** TODO: 1 filters, 2 fetch feedback and rates, 3 style and media queries  */}
 
         </div>
       </section>
