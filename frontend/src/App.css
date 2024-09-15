@@ -399,7 +399,37 @@ body{
     .card-property{
       display: flex;
       align-items: center;
-      justify-content: space-around;
+      justify-content: space-between;
+      width:90%;
+      margin-right: 10%;
+      margin: 2rem;
+      padding: 1rem;
+      box-shadow: 2px 2px 2px 2px lightgray;
+      border-radius: 2%;
+    }
+
+    .card-property img{
+      height:20rem;
+      width:30rem;
+      border-radius: 5%;
+    }
+
+    .description-hotel-box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width:45%;
+        text-align: center;
+    }
+
+    .btn-book{
+      height: 100%;
+      width:80%;
+      font-size: 1.5rem;
+      font-family: 'Booking';
+      border-radius: 2%;
     }
 
 

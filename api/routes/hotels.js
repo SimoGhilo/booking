@@ -41,7 +41,7 @@ router.get('/', async (req, res) => {
       const searchTerm = `${req.params.name}`;
       const [rows] = await pool.query(`SELECT H.* FROM booking.hotels H
 LEFT JOIN cities C ON H.city_id = C.id
-WHERE C.name LIKE '%${searchTerm}%'`);
+WHERE C.name = '${searchTerm}'`);
       res.json(rows);
     } catch (error) {
       console.error('Error fetching hotels:', error);
