@@ -9,6 +9,7 @@ function ViewProperties(props) {
   const [actualCity, setActualCity] = useState('');
   const [budget, setBudget] = useState(50); 
   const [rates, setRates] = useState([]);
+  const [filterPrice, setFilterPrice] = useState(999999999999);
 
 
 
@@ -83,6 +84,12 @@ useEffect(() => {
 
 /** Handle event handlers */
 
+/**Handle filter selections */
+
+const handlePriceFilterChange = (e) => {
+  setFilterPrice(e.target.value);
+}
+
 /*Handle change of budget */
 
 const handleBudgetChange = (e) => {
@@ -102,7 +109,10 @@ const handleBudgetChange = (e) => {
             min={50} 
             max={350} 
             value={budget} 
-            onChange={handleBudgetChange}
+            onChange= {(e) => {
+              handleBudgetChange(e);
+              handlePriceFilterChange(e);
+            }}
           />
           </div>
           <br/>
@@ -122,43 +132,49 @@ const handleBudgetChange = (e) => {
               <br/>
               <label for="pool">Free parking</label>
               <input type='checkbox' id="parking"/>
+              <br/>
           </div>
         </section>
 
         <section className='grid-section' id="main-content">
-          <h2>{actualCity}: {numberProp} properties found</h2>
-          {properties.length > 0 && properties.map((p)=> (
-            <>
-              <div className='card-property'>
-              <img src={`${process.env.PUBLIC_URL}/roomImages/${p.src}`} alt="Hotel" />
-                <div className='description-hotel-box'>
-                  <h1>{p.name}</h1>
-                  <p>{p.address}</p>
-                  <p>{p.amenities}</p>
-                  <p>{p.description}</p>
-                </div>
-                <div className='description-hotel-box'>
-                  {rates && rates.map((r)=> {
-                    if(r.hotel_id == p.id)
-                      {
-                        return (
-                              <>
-                                <p>Room type: {r.room_type}</p>
-                                <p>Price per night £ {r.rate}</p>
-                              </>
-                        )
-                      } 
-                  })}
-                  <button className="btn btn-book" type="submit">Book</button>
-                </div>
-              </div>
-            </>
-          ))}
-          <div>
-            {/** TODO: 1 fetch feedback and rates, 2 make filters work*/}
+      <h2>{actualCity}: {numberProp} properties found</h2>
+      {properties.length > 0 && properties.map((p) => {
+        // Find the rate for the current property
+        const propertyRates = rates.filter((r) => r.hotel_id === p.id);
 
-        </div>
-      </section>
+        // Find the minimum rate for the property to compare with the filter price
+        const minRate = Math.min(...propertyRates.map(r => r.rate));
+
+        // Only render the property if the minimum rate is less than or equal to the filter price
+        if (minRate <= filterPrice) {
+          return (
+            <div className='card-property' key={p.id}>
+              <img src={`${process.env.PUBLIC_URL}/roomImages/${p.src}`} alt="Hotel" />
+              <div className='description-hotel-box'>
+                <h1>{p.name}</h1>
+                <p>{p.address}</p>
+                <p>{p.amenities}</p>
+                <p>{p.description}</p>
+              </div>
+              <div className='description-hotel-box'>
+                {propertyRates.map((r) => (
+                  <div key={r.id}>
+                    <p>Room type: {r.room_type}</p>
+                    <p>Price per night £{r.rate}</p>
+                  </div>
+                ))}
+                <button className="btn btn-book" type="submit">Book</button>
+              </div>
+            </div>
+          );
+        }
+        // If the property rate is higher than the filter price, don't render it
+        return null;
+      })}
+      <div>
+        {/** TODO: 1 fetch feedback  2 filter amenities*/}
+      </div>
+    </section>
     </div>
   )
 }
