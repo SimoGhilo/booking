@@ -7,8 +7,7 @@ function ViewProperties(props) {
   const [properties, setProperties] = useState([]);
   const [numberProp, setNumberProp] = useState(0);
   const [actualCity, setActualCity] = useState('');
-
- // const[hideProperties, setHidePreview]
+  const [budget, setBudget] = useState(50); 
 
 
 
@@ -66,14 +65,46 @@ useEffect(()=> {
   setActualCity(props.searchTerm);
 },[fetchProperties])
 
+/*Handle change of budget */
 
+const handleBudgetChange = (e) => {
+  setBudget(e.target.value);
+};
 
   
   return (
     <div className='grid-box'>
 
         <section className='grid-section' id="sidebar">
-          <h4>Filters</h4>
+          <h2>Filter by</h2> 
+          <div className='filter-box'>
+              <p>Budget per night: £{budget}</p>
+              <input 
+            type='range' 
+            min={50} 
+            max={300} 
+            value={budget} 
+            onChange={handleBudgetChange}
+          />
+          </div>
+          <br/>
+          <div className='filter-box'>
+              <p>Amenities</p>
+              <label for="wifi">Wifi</label>
+              <input type='checkbox' id="wifi"/>
+              <br/>
+              <label for="pool">Pool</label>
+              <input type='checkbox' id="pool"/>
+              <br/>
+              <label for="pool">Gym</label>
+              <input type='checkbox' id="gym"/>
+              <br/>
+              <label for="pool">Restaurant/Bar</label>
+              <input type='checkbox' id="F&B"/>
+              <br/>
+              <label for="pool">Free parking</label>
+              <input type='checkbox' id="parking"/>
+          </div>
         </section>
 
         <section className='grid-section' id="main-content">
@@ -81,8 +112,7 @@ useEffect(()=> {
           {properties.length > 0 && properties.map((p)=> (
             <>
               <div className='card-property'>
-              {console.log(`${process.env.PUBLIC_URL}roomImages/la.jpg`, 'Image Source')}
-              <img src={`${process.env.PUBLIC_URL}roomImages/${p.src}`} alt="Hotel" />
+              <img src={`${process.env.PUBLIC_URL}/roomImages/${p.src}`} alt="Hotel" />
                 <div className='description-hotel-box'>
                   <h1>{p.name}</h1>
                   <p>{p.address}</p>
@@ -98,7 +128,7 @@ useEffect(()=> {
             </>
           ))}
           <div>
-            {/** TODO: 1 filters, 2 fetch feedback and rates, 3 style and media queries  */}
+            {/** TODO: 1 fetch feedback and rates, 2 make filters work*/}
 
         </div>
       </section>

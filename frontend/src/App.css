@@ -387,14 +387,23 @@ body{
 
     #sidebar{
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      background-color: #ffb700;
+      justify-content: start;
+      min-height: fit-content;
+      border: 2px solid gray;
+      height: 30%;
+      border-radius: 5%;
     }
 
-    /* #main-content{
+    .filter-box{
+      width: 90%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-    } */
 
     .card-property{
       display: flex;
@@ -432,7 +441,36 @@ body{
       border-radius: 2%;
     }
 
+    /*View properties media queries*/
 
+    @media (max-width: 860px) {
+
+
+      .grid-section{
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+
+
+      .card-property{
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin-left:0.5rem;
+      }
+
+      .card-property img{
+        height:10rem;
+        width:19rem;
+        border-radius: 5%;
+      }
+
+      #sidebar{
+        display: none;
+      }
+
+    }
 
 
 
