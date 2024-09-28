@@ -66,6 +66,7 @@ app.use(require('cors')());
 /** Routes files */
 const hotelsRouter = require('./routes/hotels');
 const citiesRouter = require('./routes/cities');
+const ratesRouter = require('./routes/rates');
 
 
 /** Routes */
@@ -73,6 +74,8 @@ const citiesRouter = require('./routes/cities');
 app.use('/api/hotels', hotelsRouter);
 
 app.use('/api/cities', citiesRouter);
+
+app.use('/api/rates', ratesRouter);
 
 // Start server
 app.listen(port, () => {

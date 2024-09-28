@@ -8,6 +8,7 @@ function ViewProperties(props) {
   const [numberProp, setNumberProp] = useState(0);
   const [actualCity, setActualCity] = useState('');
   const [budget, setBudget] = useState(50); 
+  const [rates, setRates] = useState([]);
 
 
 
@@ -65,6 +66,23 @@ useEffect(()=> {
   setActualCity(props.searchTerm);
 },[fetchProperties])
 
+
+async function fetchRates() {
+  let resJson = await fetch(`http://localhost:5000/api/rates/`);
+  let res = await resJson.json();
+  return res;
+}
+
+useEffect(() => {
+  const getRates = async () => {
+    setRates(await fetchRates());
+  };
+  getRates();
+}, [props.searchTerm]);
+
+
+/** Handle event handlers */
+
 /*Handle change of budget */
 
 const handleBudgetChange = (e) => {
@@ -82,7 +100,7 @@ const handleBudgetChange = (e) => {
               <input 
             type='range' 
             min={50} 
-            max={300} 
+            max={350} 
             value={budget} 
             onChange={handleBudgetChange}
           />
@@ -120,8 +138,17 @@ const handleBudgetChange = (e) => {
                   <p>{p.description}</p>
                 </div>
                 <div className='description-hotel-box'>
-                  <p>Feedback here</p>
-                  <p>£ 200</p>
+                  {rates && rates.map((r)=> {
+                    if(r.hotel_id == p.id)
+                      {
+                        return (
+                              <>
+                                <p>Room type: {r.room_type}</p>
+                                <p>Price per night £ {r.rate}</p>
+                              </>
+                        )
+                      } 
+                  })}
                   <button className="btn btn-book" type="submit">Book</button>
                 </div>
               </div>
