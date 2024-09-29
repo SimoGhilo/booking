@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './styles/Login.css';
 
 
-const LoginForm = () => {
+const Register = () => {
   // State for form inputs
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
@@ -31,9 +31,29 @@ const LoginForm = () => {
 
   return (
     <div className="login-form">
-      <h2>Login</h2>
+      <h2>Register</h2>
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="name">First name:</label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="surname">Last name:</label>
+          <input
+            type="text"
+            id="surname"
+            value={surname}
+            onChange={(e) => setSurname(e.target.value)}
+            required
+          />
+        </div>
         <div>
           <label htmlFor="email">Email:</label>
           <input
@@ -54,13 +74,23 @@ const LoginForm = () => {
             required
           />
         </div>
-        <button type="submit">Login</button>
-        <Link to="/register" className="button">
-        <button>Sign Up</button>
+        <div>
+          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Create Account</button>
+        <Link to="/login" className="button">
+        <button>Log in</button>
       </Link>
       </form>
     </div>
   );
 };
 
-export default LoginForm;
+export default Register;

@@ -205,7 +205,7 @@ const handleParkingFilter = (e) => {
         return null;
       })}
       <div>
-        {/** TODO: 1 fetch feedback (after users)*/}
+        {/** TODO: 1 sessions users/register/login 2 fetch feedback */}
       </div>
     </section>
     </div>

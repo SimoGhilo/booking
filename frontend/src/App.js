@@ -4,6 +4,7 @@ import Home from './components/Home';
 import SearchBar from './components/SearchBar';
 import Login from './components/Login';
 import logo from './img/logo.png';
+import Register from './components/Register';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<SearchBar />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register/>} />
           </Routes>
         </body>
         <footer>
