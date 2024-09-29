@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './styles/Login.css';
 
 
 const Register = () => {
+
+  // Hook
+  const navigate = useNavigate();
+
   // State for form inputs
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
@@ -11,6 +15,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   // Handle form submission
   const handleSubmit = (e) => {
@@ -21,18 +26,74 @@ const Register = () => {
       return;
     }
 
+    if(!email.includes('@'))
+    {
+        setErrorMessage('Please use a valid email.');
+        return;
+    }
+
+    if(password != confirmPassword)
+    {
+        setErrorMessage("passwords need to match.")
+        return;
+    }
+
+    if(password.length < 6)
+    {
+        setErrorMessage("Password must be at least 6 characters!")
+        return;
+    }
+
     // Reset error message
     setErrorMessage('');
 
-    /** APi stuff */
-
+    /** Call api to register */    
+    registerUser();
 
   };
+
+  async function registerUser(){
+
+    const formData = {
+        name: name,
+        surname: surname,
+        email: email,
+        password: password
+      };
+
+      try {
+        let result = await fetch('http://localhost:5000/api/register', {
+            method: 'POST',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        let data = await result.json();
+
+        if (data.ok) {
+            // Handle success (e.g., redirect or show a success message)
+            setSuccessMessage('User created successfully!');
+            setTimeout(() => {
+                navigate('/login');
+            }, 2500);
+          } else {
+            setErrorMessage(data.message || 'An error occurred');
+          }
+        
+      } catch (error) {
+        setErrorMessage('Network error, please try again later.');
+      }
+
+
+  }
 
   return (
     <div className="login-form">
       <h2>Register</h2>
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      {errorMessage && <h3 style={{ color: 'red' }}>{errorMessage}</h3>}
+      {successMessage && <h3 style={{ color: 'green' }}>{successMessage}</h3>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">First name:</label>
@@ -57,7 +118,7 @@ const Register = () => {
         <div>
           <label htmlFor="email">Email:</label>
           <input
-            type="text"
+            type="email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}

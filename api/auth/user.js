@@ -28,9 +28,10 @@ const findUserById = (id, callback) => {
 
 const createUser = (name, email, hashedPassword, surname, callback) => {
   pool.query("INSERT INTO users (`name`, `email`, `password`, `created_at`,`surname`)  VALUES ()", [name,email,hashedPassword,new Date().toISOString(), surname ], (err, results) => {
+    /**TODO: Error here in backend, callback is not a function, error feedback to user */
     if (err) return callback(err);
     if (results.length === 0) return callback(null, null);
-    return callback(null, true); /** TODO: we probably do not return anything */
+    return callback(null, true);
   });
 };
 
