@@ -9,7 +9,13 @@ function ViewProperties(props) {
   const [actualCity, setActualCity] = useState('');
   const [budget, setBudget] = useState(50); 
   const [rates, setRates] = useState([]);
+  // Filter states
   const [filterPrice, setFilterPrice] = useState(999999999999);
+  const [filterWifi, setFilterWifi] = useState(false);
+  const [filterPool, setFilterPool] = useState(false);
+  const [filterGym, setFilterGym] = useState(false);
+  const [filterFB, setFilterFB] = useState(false);
+  const [filterParking, setFilterParking] = useState(false);
 
 
 
@@ -96,6 +102,27 @@ const handleBudgetChange = (e) => {
   setBudget(e.target.value);
 };
 
+/** handle change filters checkbox */
+const handleWifiFilter = (e) => {
+  setFilterWifi(e.target.checked);
+}
+
+const handlePoolFilter = (e) => {
+  setFilterPool(e.target.checked);
+}
+
+const handleGymFilter = (e) => {
+  setFilterGym(e.target.checked);
+}
+
+const handleFBFilter = (e) => {
+  setFilterFB(e.target.checked);
+}
+
+const handleParkingFilter = (e) => {
+  setFilterParking(e.target.checked);
+}
+
   
   return (
     <div className='grid-box'>
@@ -119,19 +146,19 @@ const handleBudgetChange = (e) => {
           <div className='filter-box'>
               <p>Amenities</p>
               <label for="wifi">Wifi</label>
-              <input type='checkbox' id="wifi"/>
+              <input type='checkbox' id="wifi" checked={filterWifi} onChange={handleWifiFilter} />
               <br/>
               <label for="pool">Pool</label>
-              <input type='checkbox' id="pool"/>
+              <input type='checkbox' id="pool" checked={filterPool} onChange={handlePoolFilter}/>
               <br/>
-              <label for="pool">Gym</label>
-              <input type='checkbox' id="gym"/>
+              <label for="gym">Gym</label>
+              <input type='checkbox' id="gym" checked={filterGym} onChange={handleGymFilter}/>
               <br/>
-              <label for="pool">Restaurant/Bar</label>
-              <input type='checkbox' id="F&B"/>
+              <label for="F&B">Restaurant/Bar</label>
+              <input type='checkbox' id="F&B" checked={filterFB} onChange={handleFBFilter}/>
               <br/>
-              <label for="pool">Free parking</label>
-              <input type='checkbox' id="parking"/>
+              <label for="parking">Free parking</label>
+              <input type='checkbox' id="parking" checked={filterParking} onChange={handleParkingFilter}/>
               <br/>
           </div>
         </section>
@@ -145,8 +172,15 @@ const handleBudgetChange = (e) => {
         // Find the minimum rate for the property to compare with the filter price
         const minRate = Math.min(...propertyRates.map(r => r.rate));
 
-        // Only render the property if the minimum rate is less than or equal to the filter price
-        if (minRate <= filterPrice) {
+        // Check amenities string for each filter
+        const hasWifi = !filterWifi ? true :  (p.amenities).toLowerCase().includes("wifi");
+        const hasPool = !filterPool ? true :  (p.amenities).toLowerCase().includes("pool");
+        const hasGym = !filterGym ? true :  (p.amenities).toLowerCase().includes("gym");
+        const hasFB = !filterFB ? true : p.amenities.toLowerCase().includes("bar") || p.amenities.toLowerCase().includes("restaurant")
+        const hasParking = !filterParking ? true : p.amenities.includes("Free parking");
+
+        // Only render the property if all selected filters match
+        if ((minRate <= filterPrice) && hasWifi && hasPool && hasGym && hasFB && hasParking) {
           return (
             <div className='card-property' key={p.id}>
               <img src={`${process.env.PUBLIC_URL}/roomImages/${p.src}`} alt="Hotel" />
@@ -168,11 +202,10 @@ const handleBudgetChange = (e) => {
             </div>
           );
         }
-        // If the property rate is higher than the filter price, don't render it
         return null;
       })}
       <div>
-        {/** TODO: 1 fetch feedback  2 filter amenities*/}
+        {/** TODO: 1 fetch feedback (after users)*/}
       </div>
     </section>
     </div>
