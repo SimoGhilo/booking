@@ -10,11 +10,17 @@ const pool = mysql.createPool({
   database: 'booking'
 });
 
-const findUserByEmail = (email, callback) => {
-  pool.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
-    if (err) return callback(err);
-    if (results.length === 0) return callback(null, null);
-    return callback(null, results[0]);
+const findUserByEmail = (email) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      "SELECT * FROM users WHERE email = ?", 
+      [email], 
+      (err, results) => {
+        if (err) return reject(err);
+        // Check if the user was created successfully
+        return resolve(results.affectedRows > 0); // Resolve true if a row was affected
+      }
+    );
   });
 };
 

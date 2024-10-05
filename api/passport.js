@@ -5,6 +5,8 @@ const findUserByEmail = require('./auth/user.js')
 passport.use(new LocalStrategy(
     function(email, password, done) {
         findUserByEmail(email, (err, user) => {
+          /**TODO The below function is not being triggered */
+          console.log('I am being ussed!', user, email, '!');
         if (err) { return done(err); } 
         if (!user) {
           return done(null, false, { message: 'Incorrect username or password' });

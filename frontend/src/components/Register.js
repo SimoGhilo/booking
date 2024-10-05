@@ -72,8 +72,6 @@ const Register = () => {
 
         let data = await result.json();
 
-        console.log(data, 'data');
-
         if (data.message) {
             // Handle success (e.g., redirect or show a success message)
             setSuccessMessage('User created successfully!');

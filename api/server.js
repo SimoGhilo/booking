@@ -11,7 +11,13 @@ app.use(express.json());
 
 /**CORS */
 
-app.use(cors());
+// CORS configuration
+const corsOptions = {
+  origin: 'http://localhost:3000', // Specify your frontend URL
+  credentials: true, // Allow credentials
+};
+
+app.use(cors(corsOptions)); // Use the CORS middleware
 
 /** Session */
 
@@ -101,13 +107,30 @@ app.post(
 );
 
 // Login route
-app.post('/login',
-  passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/login',
-    failureFlash: true
-  })
-);
+app.post('/api/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ message: 'An error occurred during login. Please try again later.' });
+    }
+    if (!user) {
+      // User not found or invalid credentials
+      return res.status(401).json({ message: info.message || 'Invalid username or password.' });
+    }
+
+    // Successful authentication
+    req.logIn(user, (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'An error occurred while logging in. Please try again later.' });
+      }
+
+      // Respond with success
+      return res.json({ message: 'Login successful', user });
+    });
+  })(req, res, next); // Important: pass req, res, and next to the authenticate function
+});
+
 
 // Logout route
 app.get('/logout', (req, res) => {
