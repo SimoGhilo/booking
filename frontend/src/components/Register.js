@@ -65,24 +65,32 @@ const Register = () => {
         let result = await fetch('http://localhost:5000/api/register', {
             method: 'POST',
             headers: {
-                'content-type' : 'application/json'
+                'Content-Type' : 'application/json'
             },
             body: JSON.stringify(formData)
         });
 
         let data = await result.json();
 
-        if (data.ok) {
+        console.log(data, 'data');
+
+        if (data.message) {
             // Handle success (e.g., redirect or show a success message)
             setSuccessMessage('User created successfully!');
             setTimeout(() => {
                 navigate('/login');
             }, 2500);
-          } else {
-            setErrorMessage(data.message || 'An error occurred');
+          } else if(data.errors) {
+
+            let error =  "";
+
+            data.errors.forEach((e) => error += e.msg + " ");
+            setErrorMessage(error || 'An error occurred');
           }
         
       } catch (error) {
+        console.log(error, 'error');
+
         setErrorMessage('Network error, please try again later.');
       }
 

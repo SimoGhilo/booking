@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const port = process.env.PORT || 5000;
 const User = require('./auth/user');
 /**Data sanitisation and validation library */
@@ -7,6 +8,10 @@ const { body, validationResult } = require('express-validator');
 
 /** JSON */
 app.use(express.json());
+
+/**CORS */
+
+app.use(cors());
 
 /** Session */
 
@@ -63,7 +68,6 @@ app.post(
       .matches(/[A-Z]/).withMessage('Password must contain at least one uppercase letter.')
   ],
   async (req, res) => {
-    console.log('Received body:', req.body); 
     // Check for validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -77,8 +81,14 @@ app.post(
       // Hash the password using bcrypt
       const hashedPassword = bcrypt.hashSync(password, 10);
 
-      // Create the user in the database (assuming User.createUser exists)
-      User.createUser(name, email, hashedPassword, surname);
+      // Create the user in the database
+      User.createUser(name, email, hashedPassword, surname, (err, result) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ message: 'Registration failed. Please try again later.' });
+        }
+        return res.status(201).json({ message: 'User registered successfully.' });
+      });
 
       // If user creation is successful, send success response
       res.status(201).json({ message: 'User registered successfully.' });
