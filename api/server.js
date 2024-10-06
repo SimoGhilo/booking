@@ -29,7 +29,7 @@ app.use(session({
     secret: 'somesecret',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true } 
+    cookie: { secure: false } 
   }));
   
   // Passport JS
@@ -105,6 +105,33 @@ app.post(
     }
   }
 );
+
+/***Protect routes middleware */
+
+/**TODO: error below, this does not protect /dashboard, it might be due to
+ * The difference of ports frontend 3000, backend 5000
+ */
+
+function isAuthenticated(req, res, next) {
+
+  console.log('Is Authenticated:', req.isAuthenticated()); // Check if the user is authenticated
+  console.log('Session:', req.session); // Check the session object
+  console.log('User:', req.user); // Check if the user is available
+
+  if (req.isAuthenticated()) {
+    return next(); // If authenticated, proceed to the next middleware
+  }
+  // If not authenticated, send a 401 Unauthorized response
+  return res.status(401).json({ message: 'Unauthorized access. Please log in.' });
+}
+
+// Protect the /dashboard route with the isAuthenticated middleware
+app.get('/dashboard', isAuthenticated, (req, res) => {
+  // If the user is authenticated, this code will run
+  res.json({ message: 'Welcome to the dashboard!', user: req.user });
+});
+
+
 
 // Login route
 app.post('/api/login', (req, res, next) => {
