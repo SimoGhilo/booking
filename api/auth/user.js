@@ -16,13 +16,20 @@ const findUserByEmail = (email) => {
       "SELECT * FROM users WHERE email = ?", 
       [email], 
       (err, results) => {
-        if (err) return reject(err);
-        // Check if the user was created successfully
-        return resolve(results.affectedRows > 0); // Resolve true if a row was affected
+        if (err) {
+          return reject(err);
+        }
+        // Check if any rows were returned
+        if (results.length > 0) {
+          return resolve(results[0]); // Resolve with user object
+        } else {
+          return resolve(null); // Resolve with null if no user is found
+        }
       }
     );
   });
 };
+
 
 const findUserById = (id, callback) => {
   pool.query('SELECT * FROM users WHERE id = ?', [id], (err, results) => {

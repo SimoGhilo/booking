@@ -56,18 +56,14 @@ const LoginForm = () => {
 
         console.log(data, 'data');
 
-        if (data.message) {
+        if (data.user) {
             // Handle success (e.g., redirect or show a success message)
             setSuccessMessage('Login successful!');
             setTimeout(() => {
                 navigate('/dashboard');
             }, 2500);
-          } else if(data.errors) {
-
-            let error =  "";
-
-            data.errors.forEach((e) => error += e.msg + " ");
-            setErrorMessage(error || 'An error occurred');
+          } else {
+            setErrorMessage(data.message || 'An error occurred');
           }
         
       } catch (error) {
