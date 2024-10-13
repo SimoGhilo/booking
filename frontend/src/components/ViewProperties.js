@@ -206,6 +206,7 @@ const handleParkingFilter = (e) => {
       })}
       <div>
         {/** TODO: 1 sessions users/register/login 2 fetch feedback */}
+        {/** TODO: instead of "Book" we would have Log in or redirect to login to continue to booking page */}
       </div>
     </section>
     </div>
