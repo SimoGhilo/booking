@@ -54,8 +54,6 @@ const LoginForm = () => {
 
         let data = await result.json();
 
-        console.log(data, 'data');
-
         if (data.user) {
             // Handle success (e.g., redirect or show a success message)
             setSuccessMessage('Login successful!');
