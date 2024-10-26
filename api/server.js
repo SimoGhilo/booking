@@ -170,6 +170,7 @@ app.use(require('cors')());
 const hotelsRouter = require('./routes/hotels');
 const citiesRouter = require('./routes/cities');
 const ratesRouter = require('./routes/rates');
+const reservationsRouter = require('./routes/reservations');
 
 
 /** Routes */
@@ -179,6 +180,8 @@ app.use('/api/hotels', hotelsRouter);
 app.use('/api/cities', citiesRouter);
 
 app.use('/api/rates', ratesRouter);
+
+app.use('/api/reservations', reservationsRouter);
 
 // Start server
 app.listen(port, () => {

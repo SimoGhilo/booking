@@ -1,0 +1,17 @@
+.container-trips{
+    text-align: center;
+}
+
+.box-trip{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    box-shadow: 6px 6px 6px 6px lightgray;
+    margin-bottom: 2rem;
+}
+
+.text-box{
+    margin-left: 2rem;
+}
+
