@@ -116,14 +116,6 @@ function isAuthenticated(req, res, next) {
   return res.status(401).json({ message: 'Unauthorized access. Please log in.' });
 }
 
-/**TODO: above is only to protect endpoint on the backend. Routes need protecting for getting user data */
-
-// // Protect the /dashboard route with the isAuthenticated middleware
-// app.get('/dashboard', isAuthenticated, (req, res) => {
-//   // If the user is authenticated, this code will run
-//   res.json({ message: 'Welcome to the dashboard!', user: req.user });
-// });
-
 /**This is to protect access to protected component on the frontend */
 
 // Route to check authentication status

@@ -9,9 +9,6 @@ function Dashboard() {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState([]);
 
-    /** TODO: expand the protection of frontend to register and log in components, If someone is auth no log in */
-
-    /**TODO: The app is losing the session after loggin on. Using redux to keep session across components ? */
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -52,13 +49,13 @@ function Dashboard() {
             <>
                 <h1>Welcome {user.name}</h1>
                 <h4>Bookings & Trips</h4>
-                {/** TODO: allow user to view their bookings */}
             </>
           )
-      }
+      } 
 
 
 
-}
+} 
+
 
 export default Dashboard

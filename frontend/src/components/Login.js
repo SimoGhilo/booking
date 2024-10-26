@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './styles/Login.css';
 
@@ -31,6 +31,36 @@ const LoginForm = () => {
 
 
   };
+
+  /** Code below is used to redirect the user to the dashboard if authenticated */
+  
+  useEffect(() => {
+      const checkAuth = async () => {
+        try {
+          const response = await fetch('http://localhost:5000/auth/check', {
+            method: 'GET',
+            credentials: 'include'  // Sends session cookies along with the request
+          });
+
+          if(!response.ok){
+              navigate('/login');
+          }
+
+          const data = await response.json();
+          // If the user is authenticated, redirect to dashboard
+          if (data.authenticated) {
+              navigate('/dashboard');
+              } 
+
+        } catch (error) {
+          console.log(error);
+        } 
+      };
+
+      checkAuth();
+  }, []);
+
+  /** Auth check ends */
 
 
   /**APi functions  */
