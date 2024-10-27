@@ -89,10 +89,15 @@ function Dashboard() {
                 {bookings.map((booking) => {
                   return (
                     <div className='box-trip'>
-                      <h2 className='text-box'>{booking.name}</h2>
-                      <h4 className='text-box'>{booking.hotelName}</h4>
+                      <div>
+                        <p className='text-box'>{booking.name}</p>
+                        <p className='text-box'>{booking.hotelName}</p>
+                      </div>
                       <img src={`${process.env.PUBLIC_URL}/roomImages/${booking.src}`}/>
-                      {/** TODO sort out frontend, finish hotel property page and booking page */}
+                      <div>
+                        <p>{booking.start_date.slice(0,10)}</p>
+                        <p>{booking.end_date.slice(0,10)}</p>
+                      </div>
                     </div>
                   )
                 })}
