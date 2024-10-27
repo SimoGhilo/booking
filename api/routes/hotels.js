@@ -15,15 +15,15 @@ router.get('/', async (req, res) => {
   }
 });
 
-// router.get('/:id', async (req, res) => {
-//     try {
-//       const [rows] = await pool.query(`SELECT * FROM hotels WHERE id = ${req.params.id}`);
-//       res.json(rows);
-//     } catch (error) {
-//       console.error('Error fetching hotels:', error);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//     }
-//   });
+router.get('/:id', async (req, res) => {
+    try {
+      const [rows] = await pool.query(`SELECT * FROM hotels WHERE id = ${req.params.id}`);
+      res.json(rows);
+    } catch (error) {
+      console.error('Error fetching hotels:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
   router.get('/name/:name', async (req, res) => {
     try {

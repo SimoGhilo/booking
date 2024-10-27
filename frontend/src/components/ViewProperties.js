@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom';
 
 function ViewProperties(props) {
 
@@ -9,6 +10,9 @@ function ViewProperties(props) {
   const [actualCity, setActualCity] = useState('');
   const [budget, setBudget] = useState(50); 
   const [rates, setRates] = useState([]);
+
+  // User
+  const [user, setUser] = useState(null);
   // Filter states
   const [filterPrice, setFilterPrice] = useState(999999999999);
   const [filterWifi, setFilterWifi] = useState(false);
@@ -17,7 +21,8 @@ function ViewProperties(props) {
   const [filterFB, setFilterFB] = useState(false);
   const [filterParking, setFilterParking] = useState(false);
 
-
+  //Navigator
+  const navigate = useNavigate();
 
   /** Date stuff */
 
@@ -123,6 +128,44 @@ const handleParkingFilter = (e) => {
   setFilterParking(e.target.checked);
 }
 
+/** handle user redirection (e.g. when they click "Book") */
+
+/** method that checks if user is logged on */
+
+const checkAuth = async () => {
+  try {
+    const response = await fetch('http://localhost:5000/auth/check', {
+      method: 'GET',
+      credentials: 'include'  // Sends session cookies along with the request
+    });
+
+    if(!response.ok){
+        navigate('/login');
+    }
+
+    const data = await response.json();
+    // If the user is authenticated, set the state
+    if (data.authenticated) {
+        setUser(data.user.user);  // Set the user from the response
+        return true; // We want to return true to use this method in the redirectUser()
+        } else {
+            navigate('/login');
+        }
+  } catch (error) {
+    console.log(error);
+  } 
+};
+
+// We are passing down props using UseNavigate() and receiving using UseLocation() 
+async function redirectUser(propertyId) {
+  const isAuthenticated = await checkAuth();
+  if (isAuthenticated) {
+    navigate('/book', { state: { propertyId } }); // Passing propertyId as part of an object
+  } else {
+    navigate('/login');
+  }
+}
+
   
   return (
     <div className='grid-box'>
@@ -197,7 +240,7 @@ const handleParkingFilter = (e) => {
                     <p>Price per night £{r.rate}</p>
                   </div>
                 ))}
-                <button className="btn btn-book" type="submit">Book</button>
+                <button className="btn btn-book" onClick={() => redirectUser(p.id)}>Book</button>
               </div>
             </div>
           );
@@ -205,8 +248,7 @@ const handleParkingFilter = (e) => {
         return null;
       })}
       <div>
-        {/** TODO: 1 sessions users/register/login 2 fetch feedback */}
-        {/** TODO: instead of "Book" we would have Log in or redirect to login to continue to booking page */}
+        {/** TODO fetch feedback */}
       </div>
     </section>
     </div>

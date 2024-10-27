@@ -6,6 +6,7 @@ import Login from './components/Login';
 import logo from './img/logo.png';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
+import Book from './components/Book';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register/>} />
             <Route path="/dashboard" element={<Dashboard/>} />
+            <Route path="/book" element={<Book/>} />
           </Routes>
         </body>
         <footer>
