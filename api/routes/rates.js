@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:hotel_id', async (req, res) => {
     try {
-      const [rows] = await pool.query(`SELECT * FROM rates WHERE hotel_id = ${req.params.id}`);
+      const [rows] = await pool.query(`SELECT * FROM rates WHERE hotel_id = ${req.params.hotel_id}`);
       res.json(rows);
     } catch (error) {
       console.error('Error fetching rates:', error);
