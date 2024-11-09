@@ -24,6 +24,12 @@ function ViewProperties(props) {
   //Navigator
   const navigate = useNavigate();
 
+  // Get the props that we wil luse to pass it down to the useLocation();
+
+  let start = props.startDate;
+  let end = props.endDate;
+  let guests = props.guests;
+
   /** Date stuff */
 
   // Date function for date input, toISOString() returns the date in YYYY-MM-DD, parameter accepted by input
@@ -160,7 +166,7 @@ const checkAuth = async () => {
 async function redirectUser(propertyId) {
   const isAuthenticated = await checkAuth();
   if (isAuthenticated) {
-    navigate('/book', { state: { propertyId } }); // Passing propertyId as part of an object
+    navigate('/book', { state: { propertyId, start, end, guests } }); // Passing propertyId as part of an object
   } else {
     navigate('/login');
   }

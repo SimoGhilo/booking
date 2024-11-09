@@ -7,6 +7,9 @@ function Book() {
     /** Fetch the property id clicked */
     const location = useLocation();
     const propertyId = location.state?.propertyId;
+    const startDate = location.state?.start;
+    const endDate = location.state?.end;
+    const guests = location.state?.guests;
 
     // Use navigate
     const navigate = useNavigate();
@@ -56,11 +59,23 @@ function Book() {
         checkAuth();
     }, []);
 
-    // TODO Book component, fetch all hotel info and proceed with the booking, frontend
+    console.log(info, 'info');
 
   return (
     <div>
-        {/** info object holds property info */}
+        {info && (
+          <div className="propBox">
+          <div className='col1'>
+              { <img className="img-prop"src={`${process.env.PUBLIC_URL}/roomImages/${info[0].src}`}  /> }
+          </div>
+          <div className='col2'>
+              <h3>You are booking in at {info[0].name}</h3>
+              <h5>Number of guests: {guests}</h5>
+              <h5>Check in: {startDate} from 15:00</h5>
+              <h5>Check out: {endDate} before 12:00</h5>
+          </div>
+      </div>
+      )}
     </div>
   )
 }
