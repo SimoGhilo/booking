@@ -63,6 +63,36 @@ p{
     font-size: larger;
 }
 
+
+/*Modal styles*/
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top:35%;
+    left:38%;
+    width: 60%;
+    height: 100%;
+    display: flex; /* Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 1000; /* Ensure it appears above other elements */
+    text-align: center;
+  }
+  
+  /* Modal Content */
+  .modal {
+    background: #ebedf0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(1, 1, 1, 0.2);
+    width: 80%; /* Control width as needed */
+    max-width: 500px; /* Maximum width */
+    max-height: 90%; /* Prevents overflow if content is too large */
+    overflow-y: auto; /* Adds scroll for large content */
+  }
+  
+
 @media (max-width: 768px) {
     .propBox{
         flex-direction: column;
@@ -81,4 +111,18 @@ p{
     .overflow{
         overflow-x: scroll;
     }
+
+    /*Modal*/
+
+    .modal-overlay {
+        position: fixed;
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        height: 100%;
+        display: flex; /* Flexbox for centering */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        z-index: 1000; /* Ensure it appears above other elements */
+      }
 }

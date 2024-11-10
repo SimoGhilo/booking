@@ -18,6 +18,7 @@ function Book() {
     const [user, setUser] = useState(null);
     const [info, setInfo] = useState(null); 
     const [rate, setRate] = useState(0);
+    const [showModal, setShowModal] = useState(false);
 
     /** Below is a function to fetch all the info by a property id, it will be called after the property id and user are fetched */
 
@@ -70,11 +71,38 @@ function Book() {
         checkAuth();
     }, []);
 
-    console.log(info[0].amenities, 'info');
+    /** Modal opening confirm booking hook */
+
+    useEffect(()=> {
+      let modal = document.getElementById('modal-confirm');
+
+      if(showModal){
+        if(modal)
+          {
+            modal.style.display = 'block';
+          }
+      } else {
+        if(modal)
+          {
+            modal.style.display = 'none';
+          }
+      }
+    }, [showModal])
+
+  
 
   return (
     <>
-
+        {showModal && (
+        <div id="modal-confirm" className="modal-overlay">
+          <div className="modal">
+            <h3>Are you sure you want to confirm this booking ?</h3>
+            {/** TODO: Find a way to get the data here to display : local state ? */}
+            <button>Confirm</button>
+            <button onClick={() => setShowModal(false)}>Close</button>
+          </div>
+        </div>
+        )}
         {info && (
       <div className="propBox">
           <div className='col1'>
@@ -134,7 +162,7 @@ function Book() {
                   <td><p>{r.room_type}</p></td>
                   <td><img className='icon' src={`${process.env.PUBLIC_URL}/icons/${srcIcon}`}  /></td>
                   <td><p>Subtotal £ {r.rate * Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)  )}</p></td>
-                  <td><button className="button">I will reserve</button></td>
+                  <td><button className="button" onClick={()=> setShowModal(true)}>I will reserve</button></td>
                 </tr>
               )
               })
