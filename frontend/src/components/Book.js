@@ -70,13 +70,13 @@ function Book() {
         checkAuth();
     }, []);
 
-    console.log(rate, 'rate');
+    console.log(info[0].amenities, 'info');
 
   return (
-    <div>
+    <>
 
         {info && (
-          <div className="propBox">
+      <div className="propBox">
           <div className='col1'>
               { <img className="img-prop"src={`${process.env.PUBLIC_URL}/roomImages/${info[0].src}`}  /> }
           </div>
@@ -86,26 +86,65 @@ function Book() {
               <h5>Number of guests: {guests}</h5>
               <h5>Check in: {startDate} from 15:00</h5>
               <h5>Check out: {endDate} before 12:00</h5>
+              <h3>Amenities:</h3>
+              {info[0].amenities.split(',').map((a) => {
+                if(a.toLowerCase().includes('wifi')){
+                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/wifi.png`} /><p className='pDescr'>Wifi</p></div>
+                } else if(a.toLowerCase().includes('gym')){
+                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/weight.png`} /><p className='pDescr'>Gym</p></div>
+                } else if(a.toLowerCase().includes('pool')){
+                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/swimmer.png`} /><p className='pDescr'>Swimming Pool</p></div>
+                } else if(a.toLowerCase().includes('sea')){
+                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/sun-umbrella.png`} /><p className='pDescr'>Sea Front</p></div>
+                } else if(a.toLowerCase().includes('bar') || a.toLowerCase().includes('restaurant')){
+                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/restaurant.png`} /><p className='pDescr'>Food and Drinks outlets</p></div>
+                } else if(a.toLowerCase().includes('park')){
+                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/parked-car.png`} /><p className='pDescr'>Free parking</p></div>
+                } else if(a.toLowerCase().includes('conference')){
+                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/meeting.png`} /><p className='pDescr'>Meeting Room</p></div>
+                } else if(a.toLowerCase().includes('hik')){
+                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/hiking.png`} /><p className='pDescr'>hiking trails</p></div>
+                } else if(a.toLowerCase().includes('fireplace')){
+                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/fireplace.png`} /><p className='pDescr'>Fireplace</p></div>
+                } else if(a.toLowerCase().includes('spa')){
+                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/facial-treatment.png`} /><p className='pDescr'>Spa</p></div>
+                } else if(a.toLowerCase().includes('tour')){
+                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/destination.png`} /><p className='pDescr'>Guided tours</p></div>
+                }
+              })}
           </div>
       </div>
       )}
 
-      {rate && (
-      <div className='roomBox'>
-        { rate.map((r)=> {
-          return (
-            <div>
-              {/* fetch images, style boxes and choose rooms*/ }
-              <h2>{r.room_type}</h2>
-              <p>Subtotal £ {r.rate * Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)  )}</p>
-            </div>
-          )
-        })
+      <div className='overflow'>
+        {rate && (
+        <div className='roomBox'>
+          <table>
+            <thead className='headerTable'>
+              <th><h3>Room Type</h3></th>
+              <th><h3>Number of guests</h3></th>
+              <th><h3>Price</h3></th>
+              <th><h3></h3></th>
+            </thead>
+            <tbody>
+            { rate.map((r)=> {
+              let srcIcon = r.room_type.toLowerCase() == 'single' ? 'two.png' : 'user.png';
+              return (
+                <tr>
+                  <td><p>{r.room_type}</p></td>
+                  <td><img className='icon' src={`${process.env.PUBLIC_URL}/icons/${srcIcon}`}  /></td>
+                  <td><p>Subtotal £ {r.rate * Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)  )}</p></td>
+                  <td><button className="button">I will reserve</button></td>
+                </tr>
+              )
+              })
+            }
+            </tbody>
+          </table>
+        </div> )}
 
-        }
-      </div> )}
-
-    </div>
+      </div>
+    </>
   )
 }
 

@@ -13,6 +13,56 @@
     margin: 2rem 0rem 2rem 0rem;
 }
 
+
+.roomBox{
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    margin-left: 12.5%;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.pDescr{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    padding-left: 1rem;
+}
+
+.headerTable{
+    background-color: #637692;
+    color: white;
+}
+
+table{
+    border: 2px solid #637692;
+}
+
+th{
+    padding: 2rem;
+    border: 2px solid #637692;
+}
+
+td{
+    padding: 2rem;
+    border: 2px solid #637692;
+}
+
+.icon{
+    box-shadow: none;
+}
+
+p{
+    font-size: larger;
+}
+
 @media (max-width: 768px) {
     .propBox{
         flex-direction: column;
@@ -26,5 +76,9 @@
         margin-left: 10%;
         margin-right: 10%;
         object-fit: cover; 
+    }
+
+    .overflow{
+        overflow-x: scroll;
     }
 }
