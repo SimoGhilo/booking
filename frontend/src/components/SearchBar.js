@@ -140,14 +140,16 @@ function SearchBar() {
     </form>
     {
             !hidePreview && preview && preview.length > 0 && (
-              <>
-                {preview.map((p) => (
-                  <div className='boxPreview' onClick={()=> {setIsSearch(true); setSearchTerm(p.name); setHidePreview(true);}} key={p.name}>
-                    <h2><a>{p.name}</a></h2>
-                    <span>{p.country}</span>
-                  </div>
-                ))}
-              </>
+            <>
+              <div class="outerPreview">
+                  {preview.map((p) => (
+                    <div className='boxPreview' onClick={()=> {setIsSearch(true); setSearchTerm(p.name); setHidePreview(true);}} key={p.name}>
+                      <h2 className='preview-title'><a>{p.name}</a></h2>
+                      <span>{p.country}</span>
+                    </div>
+                  ))}
+              </div>
+            </>
             )
           }
     {/** If user is searching, show properties, else show explore setion */}
