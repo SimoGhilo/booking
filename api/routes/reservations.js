@@ -27,6 +27,43 @@ router.get('/:user_id', async (req, res) => {
     }
   });
 
+  /** POST */
+
+  router.post('/book', async (req,res) => {
+    try {
+      let user_id = req.body.user_id;
+      let hotel_id = req.body.hotel_id;
+      let rate_id = req.body.rate_id;
+      let start_date = req.body.start_date;
+      let end_date = req.body.end_date;
+
+      const query = `
+      INSERT INTO \`booking\`.\`reservations\` (
+        \`user_id\`,
+        \`hotel_id\`,
+        \`rate_id\`,
+        \`start_date\`,
+        \`end_date\`
+      )
+      VALUES (?, ?, ?, ?, ?);
+    `;
+    
+    const values = [user_id, hotel_id, rate_id, start_date, end_date];
+    
+    const [result] = await pool.query(query, values)
+
+    res.json({
+      success: true,
+      message: 'Reservation successfully created',
+      result: result
+    });
+      
+    } catch (error) {
+      console.error('Error posting reservations:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
 
 
 module.exports = router;

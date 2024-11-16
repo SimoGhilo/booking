@@ -121,7 +121,7 @@ function SearchBar() {
               <p>Guests ?</p>
               <button className='btn btn-primary plusminus' onClick={(event) => {
                 event.preventDefault();
-                 if(guests <= 3)
+                 if(guests <= 1)
                   {
                     setGuests(guests + 1);
                   }

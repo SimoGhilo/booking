@@ -42,6 +42,39 @@ function Book() {
       }
 
 
+    /** Book user */
+
+    async function book(){
+
+      try {
+
+          let send = await fetch('http://localhost:5000/api/reservations/book', {
+            method: 'POST',
+            body: JSON.stringify({
+              user_id: user.id,
+              hotel_id: info[0].id,
+              rate_id: chosenRate,
+              start_date:startDate,
+              end_date:endDate
+            }),
+            headers: { 'Content-Type' : 'application/json'}
+          });
+    
+          let res = await send.json();
+
+          if(res.success){
+            //Feedback and redirect user
+          } else {
+            //Feedback and redirect user
+          }
+        
+      } catch (error) {
+        console.log(error);
+      }
+
+    }
+
+
     /**Below Use effect is to check on whether the user is authenticated or not */
     useEffect(() => {
         const checkAuth = async () => {
@@ -110,7 +143,7 @@ function Book() {
                 <p>Room type: {roomType}</p>
                 <p>Subtotal: £ {subtotal}</p>
               </div>
-            <button>Confirm</button>
+            <button onClick={() => book()}>Confirm</button>
             <button onClick={() => setShowModal(false)}>Close</button>
           </div>
         </div>
@@ -167,7 +200,7 @@ function Book() {
               <th><h3></h3></th>
             </thead>
             <tbody>
-            { rate.map((r)=> {
+            { rate.filter(r => !(guests > 1 && r.room_type.toLowerCase() === 'single')).map((r) => {
               let srcIcon = r.room_type.toLowerCase() == 'single' ? 'two.png' : 'user.png';
               return (
                 <tr>
