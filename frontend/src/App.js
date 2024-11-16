@@ -7,6 +7,7 @@ import logo from './img/logo.png';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Book from './components/Book';
+import Success from './components/Success';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path="/register" element={<Register/>} />
             <Route path="/dashboard" element={<Dashboard/>} />
             <Route path="/book" element={<Book/>} />
+            <Route path="/success" element={<Success/>} />
           </Routes>
         </body>
         <footer>

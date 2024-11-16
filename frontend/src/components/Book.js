@@ -63,9 +63,9 @@ function Book() {
           let res = await send.json();
 
           if(res.success){
-            //Feedback and redirect user
+            navigate('/success');
           } else {
-            //Feedback and redirect user
+            navigate('/error');
           }
         
       } catch (error) {
