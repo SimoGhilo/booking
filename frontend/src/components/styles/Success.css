@@ -1,4 +1,6 @@
 .Booking-Resume{
+    width:80%;
+    margin: 0% 10% 0% 10%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,3 +24,18 @@
     width:80%;
     text-align: center;
 }
+
+.button-container{
+    width:80%;
+    margin: 0% 10% 0% 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container > button{
+    width:20%
+}
+
+
+/* TODO: Media queries*/

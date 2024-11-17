@@ -70,6 +70,7 @@ function Dashboard() {
       async function getBookings() {
           if (user && user.id) { // Ensure user.id exists
               const data = await fetchBookings(user.id);
+              console.log('data', data) // TODO: Data not fetched from the backend, display all bookings for user
               setBookings(data);
           }
       }

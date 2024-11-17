@@ -84,6 +84,11 @@ function Success() {
         </table>
       </div>
     </div>
+    <br/>
+    <div className='button-container'>
+      <button onClick={()=> navigate('/dashboard')}>Back to dashboard</button>
+      <button onClick={()=> navigate('/')}>Back to Home</button>
+    </div>
   </>
   )
 }
