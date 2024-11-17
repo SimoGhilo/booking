@@ -41,6 +41,12 @@ function Book() {
         return res;
       }
 
+    /** Redirect user to success page for success method with data from this component */
+
+    const handleRedirect = () => {
+      navigate('/success', { state: { from: window.location.pathname, data:  {chosenRate, subtotal,roomType, user, info, startDate, endDate} }})
+    };
+
 
     /** Book user */
 
@@ -63,7 +69,7 @@ function Book() {
           let res = await send.json();
 
           if(res.success){
-            navigate('/success');
+            handleRedirect();
           } else {
             navigate('/error');
           }
@@ -162,27 +168,27 @@ function Book() {
               <h3>Amenities:</h3>
               {info[0].amenities.split(',').map((a) => {
                 if(a.toLowerCase().includes('wifi')){
-                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/wifi.png`} /><p className='pDescr'>Wifi</p></div>
+                  return <div className='flex'><img className='icon-amenities' src={`${process.env.PUBLIC_URL}/icons/wifi.png`} /><p className='pDescr'>Wifi</p></div>
                 } else if(a.toLowerCase().includes('gym')){
-                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/weight.png`} /><p className='pDescr'>Gym</p></div>
+                  return <div className='flex'><img className='icon-amenities'  src={`${process.env.PUBLIC_URL}/icons/weight.png`} /><p className='pDescr'>Gym</p></div>
                 } else if(a.toLowerCase().includes('pool')){
-                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/swimmer.png`} /><p className='pDescr'>Swimming Pool</p></div>
+                  return <div className='flex'><img className='icon-amenities'  src={`${process.env.PUBLIC_URL}/icons/swimmer.png`} /><p className='pDescr'>Swimming Pool</p></div>
                 } else if(a.toLowerCase().includes('sea')){
-                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/sun-umbrella.png`} /><p className='pDescr'>Sea Front</p></div>
+                  return <div className='flex'><img className='icon-amenities'  src={`${process.env.PUBLIC_URL}/icons/sun-umbrella.png`} /><p className='pDescr'>Sea Front</p></div>
                 } else if(a.toLowerCase().includes('bar') || a.toLowerCase().includes('restaurant')){
-                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/restaurant.png`} /><p className='pDescr'>Food and Drinks outlets</p></div>
+                  return <div className='flex'><img className='icon-amenities'  src={`${process.env.PUBLIC_URL}/icons/restaurant.png`} /><p className='pDescr'>Food and Drinks outlets</p></div>
                 } else if(a.toLowerCase().includes('park')){
-                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/parked-car.png`} /><p className='pDescr'>Free parking</p></div>
+                  return <div className='flex'><img className='icon-amenities'  src={`${process.env.PUBLIC_URL}/icons/parked-car.png`} /><p className='pDescr'>Free parking</p></div>
                 } else if(a.toLowerCase().includes('conference')){
-                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/meeting.png`} /><p className='pDescr'>Meeting Room</p></div>
+                  return <div className='flex'><img className='icon-amenities'  src={`${process.env.PUBLIC_URL}/icons/meeting.png`} /><p className='pDescr'>Meeting Room</p></div>
                 } else if(a.toLowerCase().includes('hik')){
                   return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/hiking.png`} /><p className='pDescr'>hiking trails</p></div>
                 } else if(a.toLowerCase().includes('fireplace')){
-                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/fireplace.png`} /><p className='pDescr'>Fireplace</p></div>
+                  return <div className='flex'><img className='icon-amenities'  src={`${process.env.PUBLIC_URL}/icons/fireplace.png`} /><p className='pDescr'>Fireplace</p></div>
                 } else if(a.toLowerCase().includes('spa')){
-                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/facial-treatment.png`} /><p className='pDescr'>Spa</p></div>
+                  return <div className='flex'><img className='icon-amenities'  src={`${process.env.PUBLIC_URL}/icons/facial-treatment.png`} /><p className='pDescr'>Spa</p></div>
                 } else if(a.toLowerCase().includes('tour')){
-                  return <div className='flex'><img src={`${process.env.PUBLIC_URL}/icons/destination.png`} /><p className='pDescr'>Guided tours</p></div>
+                  return <div className='flex'><img className='icon-amenities'  src={`${process.env.PUBLIC_URL}/icons/destination.png`} /><p className='pDescr'>Guided tours</p></div>
                 }
               })}
           </div>

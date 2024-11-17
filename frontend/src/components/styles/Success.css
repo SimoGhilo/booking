@@ -1,0 +1,24 @@
+.Booking-Resume{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:30rem;
+}
+
+.Booking-Resume > img {
+    height: 27.5rem;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    height: 100%;
+}
+
+.content > table{
+    width:80%;
+    text-align: center;
+}
