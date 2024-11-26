@@ -12,6 +12,11 @@ function Dashboard() {
 
     const [bookings, setBookings] = useState([]);
 
+
+    // utility today's date to display the bookings
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
     /**Below Use effect is to check on whether the user is authenticated or not */
     useEffect(() => {
         const checkAuth = async () => {
@@ -70,7 +75,6 @@ function Dashboard() {
       async function getBookings() {
           if (user && user.id) { // Ensure user.id exists
               const data = await fetchBookings(user.id);
-              console.log('data', data) // TODO: Data not fetched from the backend, display all bookings for user
               setBookings(data);
           }
       }
@@ -87,20 +91,50 @@ function Dashboard() {
             <div className='container-trips'>
                 <h1>Welcome, {user.name}</h1>
                 <h4>Bookings & Trips</h4>
+                <br/>
+                <h1>Past trips</h1>
                 {bookings.map((booking) => {
-                  return (
-                    <div className='box-trip'>
-                      <div>
-                        <p className='text-box'>{booking.name}</p>
-                        <p className='text-box'>{booking.hotelName}</p>
-                      </div>
-                      <img src={`${process.env.PUBLIC_URL}/roomImages/${booking.src}`}/>
-                      <div>
-                        <p>{booking.start_date.slice(0,10)}</p>
-                        <p>{booking.end_date.slice(0,10)}</p>
-                      </div>
-                    </div>
-                  )
+                  if(new Date(booking.end_date) < today){
+                    return (
+                      <>
+                        <div className='box-trip'>
+                          <div className='text-div'>
+                            <p className='text-box'>{booking.name}</p>
+                            <p className='text-box'>{booking.hotelName}</p>
+                          </div>
+                            <img src={`${process.env.PUBLIC_URL}/roomImages/${booking.src}`}/>
+                            <button className='btn-outline-light'>Review</button>
+                          <div>
+                            <p>{booking.start_date.slice(0,10)}</p>
+                            <p>{booking.end_date.slice(0,10)}</p>
+                          </div>
+                        </div>
+                      </>
+                    )
+                  } 
+                })}
+            </div>
+            <div className='container-trips'>
+              <h1>Upcoming trips</h1>
+                {bookings.map((booking) => {
+                  if(new Date(booking.end_date) > today){
+                    return (
+                      <>
+                        <div className='box-trip'>
+                          <div className='text-div'>
+                            <p className='text-box'>{booking.name}</p>
+                            <p className='text-box'>{booking.hotelName}</p>
+                          </div>
+                          <img src={`${process.env.PUBLIC_URL}/roomImages/${booking.src}`}/>
+                          <button className='btn-outline-light'>Cancel</button>
+                          <div>
+                            <p>{booking.start_date.slice(0,10)}</p>
+                            <p>{booking.end_date.slice(0,10)}</p>
+                          </div>
+                        </div>
+                      </>
+                    )
+                  } 
                 })}
             </div>
           </>

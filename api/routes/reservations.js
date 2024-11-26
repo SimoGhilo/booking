@@ -17,9 +17,9 @@ router.get('/', async (req, res) => {
 
 router.get('/:user_id', async (req, res) => {
     try {
-      const [rows] = await pool.query(` SELECT r.*, c.name, h.src, h.name AS hotelName FROM booking.reservations r 
- JOIN hotels h ON h.id = r.hotel_id
- JOIN cities c ON c.id = r.id WHERE user_id = ${req.params.user_id}`);
+      const [rows] = await pool.query(`SELECT r.*, c.name, h.src, h.name AS hotelName FROM booking.reservations r 
+ LEFT JOIN hotels h ON h.id = r.hotel_id
+ LEFT JOIN cities c ON c.id = h.city_id WHERE user_id = ${req.params.user_id}`);
       res.json(rows);
     } catch (error) {
       console.error('Error fetching reservations:', error);

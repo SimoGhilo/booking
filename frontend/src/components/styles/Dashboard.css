@@ -1,8 +1,8 @@
 .container-trips{
     text-align: center;
-    width: 75%;
-    margin-left: 12.5%;
-    margin-right: 12.5%;
+    width: 85%;
+     margin-left: 7.5%;
+    margin-right: 7.5%; 
 }
 
 .box-trip{
@@ -14,16 +14,23 @@
     margin-bottom: 2rem;
 }
 
+.text-div{
+    width:15%
+}
+
+
 .text-box{
     font-size: 1.5rem;
 }
 
 .box-trip > img {
-    height: 16rem;
     margin-top:2rem;
     margin-bottom: 2rem;
-    border-radius: 10%;
+    border-radius: 5%;
+    width: 30rem;
+    height:23rem;
 }
+
 
 @media (max-width: 768px) {
 
