@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './styles/Dashboard.css';
 
 function Dashboard() {
@@ -82,6 +82,12 @@ function Dashboard() {
       getBookings(); // Call the function directly
   }, [user]); 
 
+  /** Function that redirects the user to review component and sends down the data for leaving the review */
+
+  function redirectToReview(booking_id){
+    navigate('/review', { state: { from: window.location.pathname, data:  { user, booking_id } }})
+  }
+
 
     if (loading) {
         return <div>Loading...</div>;
@@ -103,7 +109,7 @@ function Dashboard() {
                             <p className='text-box'>{booking.hotelName}</p>
                           </div>
                             <img src={`${process.env.PUBLIC_URL}/roomImages/${booking.src}`}/>
-                            <button className='btn-outline-light'>Review</button>
+                            <button className='btn-outline-light' onClick={() => redirectToReview(booking.id)}>Review</button>
                           <div>
                             <p>{booking.start_date.slice(0,10)}</p>
                             <p>{booking.end_date.slice(0,10)}</p>

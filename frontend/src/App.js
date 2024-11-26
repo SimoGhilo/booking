@@ -8,6 +8,7 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Book from './components/Book';
 import Success from './components/Success';
+import Review from './components/Review';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard/>} />
             <Route path="/book" element={<Book/>} />
             <Route path="/success" element={<Success/>} />
+            <Route path="/review" element={<Review/>} />
           </Routes>
         </body>
         <footer>
