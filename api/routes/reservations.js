@@ -15,6 +15,16 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/booking/:booking_id', async (req, res) => {
+  try {
+    const [rows] = await pool.query(`SELECT * FROM reservations R JOIN hotels H ON R.hotel_id = H.id where R.id = ${req.params.booking_id}`);
+    res.json(rows);
+  } catch (error) {
+    console.error('Error fetching reservations:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 router.get('/:user_id', async (req, res) => {
     try {
       const [rows] = await pool.query(`SELECT r.*, c.name, h.src, h.name AS hotelName FROM booking.reservations r 
