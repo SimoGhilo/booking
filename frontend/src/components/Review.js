@@ -10,8 +10,9 @@ function Review() {
     const data = location.state?.data;
 
     /** Local states */
-    const [booking, setBooking] = useState(null);
+    const [booking, setBooking] = useState([]);
     const [rating, setRating] = useState(3); 
+    const [comment, setComment] = useState("Type your review here...");
 
     /** Handle start rating change */
 
@@ -112,37 +113,72 @@ function Review() {
 
     },[data])
 
-    console.log(data, 'da');
-    console.log(booking, 'b')
+
+    /** API functions */
+
+    function createReview(user_id, hotel_id, event){
+
+      event.preventDefault();  
+
+      /** TODO: POST review, create route in API */
+
+    }
 
 
-  return (
-    <div className='outer-box'>
-      <h1>Leave a review for {booking[0].name}</h1>
-      <img src={`${process.env.PUBLIC_URL}/roomImages/${booking[0].src}`}/>
-      <form className='review-form'>
-      <div className='form-group' id="stars-box">
-          <label for="inputText">rate your experience from 1 to 5:</label>
-          <div style={{ textAlign: 'center' }}>
-            <div>{renderStars()}</div>  {/* Display stars */}
-            <input
-              type="range"
-              min="1"
-              max="5"
-              value={rating}
-              onChange={handleChange}
-              style={{ width: '80%', marginTop: '10px' }}
+    return (
+      <>
+        {booking.length > 0 && (
+          <div className='outer-box'>
+            <h1>Leave a review for {booking[0].name}</h1>
+            <img
+              src={`${process.env.PUBLIC_URL}/roomImages/${booking[0].src}`}
+              alt={`${booking[0].name} room`}
             />
-            <p>Rating: {rating}/5</p>
+            <form
+              className='review-form'
+              id='form-create-review'
+              onSubmit={(event) =>
+                createReview(data.user.id, booking[0].hotel_id, event)
+              }
+            >
+              <div className='form-group' id='stars-box'>
+                <br />
+                <label htmlFor='inputText'>Rate your experience from 1 to 5:</label>
+                <div style={{ textAlign: 'center' }}>
+                  <div>{renderStars()}</div> {/* Display stars */}
+                  <input
+                    type='range'
+                    min='1'
+                    max='5'
+                    value={rating}
+                    onChange={handleChange}
+                    style={{ width: '40%', marginTop: '10px' }}
+                  />
+                  <p>Rating: {rating}/5</p>
+                </div>
+              </div>
+              <div className='form-group fcolumn' id='text-box'>
+                <label htmlFor='inputText'>
+                  Describe your stay at {booking[0].name}:
+                </label>
+                <textarea
+                  id='inputText'
+                  type='text'
+                  minLength={30}
+                  maxLength={500}
+                  value={comment}
+                  onChange={(event) => {setComment(event.target.value)}}
+                ></textarea>
+                <button className='btn-outline-light' type='submit'>
+                  Leave review
+                </button>
+              </div>
+            </form>
           </div>
-        </div>
-        <div className='form-group' id="text-box">
-          <label for="inputText">Describe your stay at {booking[0].name}:</label>
-          <input id="inputText" type='text' max={500}></input>
-        </div>
-      </form>
-    </div> 
-  )
+        )}
+      </>
+    );
+
 }
 
 export default Review

@@ -5,4 +5,31 @@
 }
 
 
-/*TODO: styles component, media query, post baco to DB, then component displaying all feedback for all properties*/
+img{
+    width:25rem;
+}
+
+.fcolumn{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#inputText{
+    margin-top:1rem;
+    height:5rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+@media screen and (max-width:480px){
+
+    .outer-box{
+        font-size: smaller;
+    }
+
+    img{
+        width:16rem;
+    }
+} 
