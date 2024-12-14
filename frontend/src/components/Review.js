@@ -116,11 +116,30 @@ function Review() {
 
     /** API functions */
 
-    function createReview(user_id, hotel_id, event){
+    async function createReview(user_id, hotel_id, event){
 
       event.preventDefault();  
 
       /** TODO: POST review, create route in API */
+
+      let res = await fetch('http://localhost:5000/api/review/new', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify({
+          user_id,
+          hotel_id,
+          rating: rating,
+          comment: comment
+        })
+      });
+
+      let decodedData = await res.json();
+
+      if(decodedData.success){
+        decodedData.message /** Holds the response text from server */
+      } else {
+        /**TODO: feedback user and redirect to component where all reviews are pulled */
+      }
 
     }
 

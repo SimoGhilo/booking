@@ -171,6 +171,7 @@ const hotelsRouter = require('./routes/hotels');
 const citiesRouter = require('./routes/cities');
 const ratesRouter = require('./routes/rates');
 const reservationsRouter = require('./routes/reservations');
+const reviewRouter = require('./routes/review');
 
 
 /** Routes */
@@ -182,6 +183,8 @@ app.use('/api/cities', citiesRouter);
 app.use('/api/rates', ratesRouter);
 
 app.use('/api/reservations', reservationsRouter);
+
+app.use('/api/review', reviewRouter);
 
 // Start server
 app.listen(port, () => {
