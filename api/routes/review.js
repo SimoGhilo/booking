@@ -9,7 +9,20 @@ router.get('/', async (req, res) => {
       const [rows] = await pool.query('SELECT * FROM feedback');
       res.json(rows);
     } catch (error) {
-      console.error('Error fetching cities:', error);
+      console.error('Error fetching reviews:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+  router.get('/:hotel_id', async (req, res) => {
+    let hotel_id = req.params.hotel_id;
+    try {
+      const [rows] = await pool.query(`SELECT * FROM feedback  f
+JOIN users  u ON u.id = f.user_id 
+JOIN hotels h ON h.id = f.hotel_id WHERE hotel_id = ${hotel_id}`);
+      res.json(rows);
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });

@@ -9,6 +9,7 @@ import Dashboard from './components/Dashboard';
 import Book from './components/Book';
 import Success from './components/Success';
 import Review from './components/Review';
+import Reviews from './components/Reviews';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             <Route path="/book" element={<Book/>} />
             <Route path="/success" element={<Success/>} />
             <Route path="/review" element={<Review/>} />
+            <Route path="/reviews/:hotel_id" element={<Reviews/>} />
           </Routes>
         </body>
         <footer>

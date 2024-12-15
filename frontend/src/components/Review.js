@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { redirect, useLocation, useNavigate } from 'react-router-dom';
 import './styles/Review.css';
 
 function Review() {
@@ -97,7 +97,7 @@ function Review() {
           }
       
           const res = await data.json();
-          console.log(res);  // Log to verify data structure
+
           setBooking(res);
 
         } catch (error) {
@@ -136,9 +136,9 @@ function Review() {
       let decodedData = await res.json();
 
       if(decodedData.success){
-        decodedData.message /** Holds the response text from server */
+        navigate(`/reviews/${hotel_id}`)
       } else {
-        /**TODO: feedback user and redirect to component where all reviews are pulled */
+        console.log("Something went wrong when posting the review!");
       }
 
     }
