@@ -37,8 +37,6 @@ function Reviews() {
 
 
     }, []);
-
-    /**TODO: access this component from the search page */
     
     if(reviews.length > 0){
         return (

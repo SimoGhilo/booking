@@ -172,6 +172,12 @@ async function redirectUser(propertyId) {
   }
 }
 
+// Redirect user to review page for the chosen hotel
+
+function redirectToReview(propertyId){
+  navigate(`/reviews/${propertyId}`);
+}
+
   
   return (
     <div className='grid-box'>
@@ -247,15 +253,13 @@ async function redirectUser(propertyId) {
                   </div>
                 ))}
                 <button className="btn btn-book" onClick={() => redirectUser(p.id)}>Book</button>
+                <button className="btn btn-book" onClick={()=> redirectToReview(p.id)}><small>Reviews</small></button>
               </div>
             </div>
           );
         }
         return null;
       })}
-      <div>
-        {/** TODO fetch feedback */}
-      </div>
     </section>
     </div>
   )
