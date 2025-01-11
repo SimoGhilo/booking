@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
+import './styles/Reviews.css';
 
 function Reviews() {
 
@@ -37,24 +38,31 @@ function Reviews() {
 
     }, []);
 
-    /**TODO: Style component, media queries, get access for unauthorised user to reviews */
-    
-    
+    /**TODO: access this component from the search page */
     
     if(reviews.length > 0){
         return (
             <>
-            <h1>Reviews for {reviews[0].name}</h1>
-            {reviews.map((r)=> {
-                return (
-                        <div className='review-box'>
-                            <p>{r.rating}</p>
-                            <p>{r.email} wrote:</p>
-                            <h6>{r.comment}</h6>
-                        </div>
-                )
+            <div className='outer-box'>
+                <h1>Reviews for {reviews[0].name}</h1>
+                {reviews.map((r)=> {
+                    const stars = Array(r.rating).fill('⭐');
+                    return (
+                            <div className='review-box'>
+                                <div className='rating-box'>
+                                    <p><span>⭐</span></p>
+                                    <p>{r.rating}</p>
+                                </div>
+                                <div className='text-box'>
+                                    <p>{r.email} wrote:</p>
+                                    <h6>{r.comment}</h6>
+                                    <p className='on'>On: {r.created_at.slice(0,10)}</p>
+                                </div>
+                            </div>
+                    )
 
-            })}
+                })}
+            </div>
             </>
         )
     } else {

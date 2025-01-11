@@ -1,0 +1,57 @@
+.review-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: bisque;
+    width: 55%;
+    margin-left: 22.5%;
+    margin-bottom: 1rem;
+    border-radius: 2%;
+
+}
+
+.rating-box{
+    margin-right:2rem;
+    width:5rem;
+    background-color: #003b95;
+    border-radius: 20%;
+    color: white;
+}
+
+.text-box{
+    width: 20rem;
+}
+
+.on{
+    font-size: smaller;
+}
+
+@media screen  and (max-width:460px) {
+    .review-box{
+        width: 98%;
+        margin-left: 1%;
+    }
+
+    .rating-box{
+        margin-right: 1rem;
+        margin-left: 1rem;
+        font-size: smaller;
+    }
+    .text-box{
+        font-size: 1rem;
+        margin-right: 1rem;
+    }
+
+    .text-box > p {
+        font-size: 0.75rem;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+
+    .review-box{
+        width: 80%;
+        margin-left: 10%;
+    }
+
+}
