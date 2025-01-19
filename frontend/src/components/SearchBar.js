@@ -101,6 +101,14 @@ function SearchBar() {
       }
   }, [searchTerm]);
 
+  /** Hook that controls on whether the user accessed the page using a goBack() function in children compon.*/
+
+  useEffect(()=> {
+    if(location.state?.searchTerm != '' && location.state?.searchTerm != null && location.state?.searchTerm != undefined){
+      setIsSearch(true);
+    }
+  },[])
+
 
 
 

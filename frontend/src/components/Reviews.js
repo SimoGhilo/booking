@@ -1,8 +1,12 @@
-import React, {useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom'
+import React, {useEffect, useState} from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './styles/Reviews.css';
 
 function Reviews() {
+
+    /**navigate hook */
+    const navigate = useNavigate();
 
     const {hotel_id} = useParams();
 
@@ -37,10 +41,22 @@ function Reviews() {
 
 
     }, []);
+
+    /**Function to maintain the search term when user goes back + redux useSelecto hooks*/
+
+    let previousPage = useSelector((state) => state.history.previousPage);
+    let previousSearchTerm = useSelector((state) => state.history.searchTerm);
+
+    function goBack(){
+      navigate(previousPage || '/search', { state: { searchTerm: previousSearchTerm } });
+    }
     
     if(reviews.length > 0){
         return (
             <>
+            <div className='cont-box'>
+            <button onClick={()=> goBack()}>Go back to search</button>
+            </div>
             <div className='outer-box'>
                 <h1>Reviews for {reviews[0].name}</h1>
                 {reviews.map((r)=> {
@@ -65,11 +81,14 @@ function Reviews() {
         )
     } else {
         return (
-            <div>No review Available for this hotel</div>
+            <div>
+                <p>No review Available for this hotel</p>
+                <button onClick={()=> goBack()}>Go back to search</button>
+            </div>
         )
     }
 }
 
-/** TODOs: logout, home page, fix history (i.e. save previous search term across components when user navigates back to search bar) */
+/** TODOs: logout, home page, fix history (Page navigation fixed, fix date and number of guests search term), final check media queries */
 
 export default Reviews
