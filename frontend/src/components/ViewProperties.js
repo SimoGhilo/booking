@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setPreviousPage, setSearchTerm } from './redux/historyReducer';
 
 function ViewProperties(props) {
 
@@ -23,6 +25,9 @@ function ViewProperties(props) {
 
   //Navigator
   const navigate = useNavigate();
+
+  //Redux
+  const dispatch = useDispatch();
 
   // Get the props that we wil luse to pass it down to the useLocation();
 
@@ -165,6 +170,8 @@ const checkAuth = async () => {
 // We are passing down props using UseNavigate() and receiving using UseLocation() 
 async function redirectUser(propertyId) {
   const isAuthenticated = await checkAuth();
+    dispatch(setPreviousPage('/search'));
+    dispatch(setSearchTerm(props.searchTerm));
   if (isAuthenticated) {
     navigate('/book', { state: { propertyId, start, end, guests } }); // Passing propertyId as part of an object
   } else {
@@ -175,6 +182,8 @@ async function redirectUser(propertyId) {
 // Redirect user to review page for the chosen hotel
 
 function redirectToReview(propertyId){
+  dispatch(setPreviousPage('/search'));
+  dispatch(setSearchTerm(props.searchTerm));
   navigate(`/reviews/${propertyId}`);
 }
 

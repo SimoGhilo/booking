@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './styles/Book.css';
 
 function Book() {
@@ -132,7 +133,16 @@ function Book() {
             modal.style.display = 'none';
           }
       }
-    }, [showModal])
+    }, [showModal]);
+
+    /**Function to maintain the search term when user goes back + redux useSelecto hooks*/
+
+    let previousPage = useSelector((state) => state.history.previousPage);
+    let previousSearchTerm = useSelector((state) => state.history.searchTerm);
+
+    function goBack(){
+      navigate(previousPage || '/search', { state: { searchTerm: previousSearchTerm } });
+    }
     
 
   return (
@@ -154,6 +164,10 @@ function Book() {
           </div>
         </div>
         )}
+        <div className='cont-box'>
+          <button onClick={()=> goBack()}>Go back to search</button>
+        </div>
+        
         {info && (
       <div className="propBox">
           <div className='col1'>

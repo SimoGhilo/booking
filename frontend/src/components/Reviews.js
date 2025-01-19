@@ -70,4 +70,6 @@ function Reviews() {
     }
 }
 
+/** TODOs: logout, home page, fix history (i.e. save previous search term across components when user navigates back to search bar) */
+
 export default Reviews

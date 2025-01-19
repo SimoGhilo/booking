@@ -1,3 +1,11 @@
+
+.cont-box{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .propBox{
     display: flex;
     justify-content: space-evenly;
@@ -15,6 +23,8 @@
 
 .icon-amenities{
     box-shadow: none;
+    height: 3rem;
+    width:2rem;
 }
 
 
@@ -61,6 +71,8 @@ td{
 
 .icon{
     box-shadow: none;
+    height: 3rem;
+    width:2rem;
 }
 
 p{

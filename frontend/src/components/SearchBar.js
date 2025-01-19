@@ -1,15 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Explore from './Explore';
+import { useLocation } from 'react-router-dom';
 import ViewProperties from './ViewProperties';
-import { Link } from 'react-router-dom';
+
 
 
 
 function SearchBar() {
 
+  /** location hook */
+  const location = useLocation();
+
   /**Local state */
 
-  const [searchTerm, setSearchTerm] = useState(''); // Set funct also in child component (ViewProperties.js)
+  const [searchTerm, setSearchTerm] = useState(location.state?.searchTerm || ''); // Set funct also in child component (ViewProperties.js)
   const [startDate, setStartDate] = useState(); // Set funct also in child component (ViewProperties.js)
   const [endDate, setEndDate] = useState(); // Set funct also in child component (ViewProperties.js)
   const [guests, setGuests] = useState(1);
