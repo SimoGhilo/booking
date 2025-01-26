@@ -13,9 +13,11 @@ function SearchBar() {
 
   /**Local state */
 
+  /** Location.state comes from the child component */
+
   const [searchTerm, setSearchTerm] = useState(location.state?.searchTerm || ''); // Set funct also in child component (ViewProperties.js)
-  const [startDate, setStartDate] = useState(); // Set funct also in child component (ViewProperties.js)
-  const [endDate, setEndDate] = useState(); // Set funct also in child component (ViewProperties.js)
+  const [startDate, setStartDate] = useState(location.state?.previousDate.start || ''); // Set funct also in child component (ViewProperties.js)
+  const [endDate, setEndDate] = useState(location.state?.previousDate.end || ''); // Set funct also in child component (ViewProperties.js)
   const [guests, setGuests] = useState(1);
   const [isSearch, setIsSearch] = useState(false);
   const [preview, setPreview] = useState([]); 
@@ -101,7 +103,7 @@ function SearchBar() {
       }
   }, [searchTerm]);
 
-  /** Hook that controls on whether the user accessed the page using a goBack() function in children compon.*/
+  /** Hook that controls on whether the user accessed the page using a goBack() function in child compon.*/
 
   useEffect(()=> {
     if(location.state?.searchTerm != '' && location.state?.searchTerm != null && location.state?.searchTerm != undefined){

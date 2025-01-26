@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setPreviousPage, setSearchTerm } from './redux/historyReducer';
+import { setPreviousPage, setSearchTerm, setPreviousDate } from './redux/historyReducer';
 
 function ViewProperties(props) {
 
@@ -170,8 +170,10 @@ const checkAuth = async () => {
 // We are passing down props using UseNavigate() and receiving using UseLocation() 
 async function redirectUser(propertyId) {
   const isAuthenticated = await checkAuth();
+    // Pass info to redux state before redirecting
     dispatch(setPreviousPage('/search'));
     dispatch(setSearchTerm(props.searchTerm));
+    dispatch(setPreviousDate({start, end}));
   if (isAuthenticated) {
     navigate('/book', { state: { propertyId, start, end, guests } }); // Passing propertyId as part of an object
   } else {

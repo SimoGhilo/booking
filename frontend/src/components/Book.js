@@ -139,9 +139,10 @@ function Book() {
 
     let previousPage = useSelector((state) => state.history.previousPage);
     let previousSearchTerm = useSelector((state) => state.history.searchTerm);
+    let previousDate = useSelector((state) => state.history.previousDate);
 
     function goBack(){
-      navigate(previousPage || '/search', { state: { searchTerm: previousSearchTerm } });
+      navigate(previousPage || '/search', { state: { searchTerm: previousSearchTerm, previousDate } });
     }
     
 
