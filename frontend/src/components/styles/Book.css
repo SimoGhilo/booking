@@ -107,6 +107,16 @@ p{
     max-height: 90%; /* Prevents overflow if content is too large */
     overflow-y: auto; /* Adds scroll for large content */
   }
+
+
+/* @media (max-width: 480px) {
+    .modal-overlay {
+        position: absolute;
+        width: 80%;
+        font-size: 0.75rem;
+        left:10rem;
+      }
+} */
   
 
 @media (max-width: 768px) {
@@ -128,17 +138,21 @@ p{
         overflow-x: scroll;
     }
 
+    .flex{
+        align-items: center;
+        justify-content: center;
+    }
+
     /*Modal*/
 
     .modal-overlay {
-        position: fixed;
-        width: 80%;
-        margin-left: 10%;
-        margin-right: 10%;
-        height: 100%;
+        top:20%;
+        left:15%;
+        width:80%;
         display: flex; /* Flexbox for centering */
         justify-content: center; /* Center horizontally */
         align-items: center; /* Center vertically */
         z-index: 1000; /* Ensure it appears above other elements */
+        font-size: 0.75rem;
       }
 }

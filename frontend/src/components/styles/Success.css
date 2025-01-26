@@ -37,5 +37,30 @@
     width:20%
 }
 
+@media screen and (max-width:1025px){
+    .Booking-Resume{
+        flex-direction: column;
+        width:90%;
+        font-size: 0.75rem;
+    }
 
-/* TODO: Media queries*/
+    th{
+        padding:1rem;
+    }
+
+    img{
+        display: none;
+    }
+
+    .overflow{
+        overflow-x: scroll;
+        border:3px lightgray solid;
+        width:20rem;
+        margin-right:1rem;
+
+    }
+
+    .button-container > button{
+        width:60%
+    }
+}

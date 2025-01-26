@@ -51,37 +51,39 @@ function Success() {
       <br/>
       <div className='content'>
         <h1>Your booking at {data.info[0].name}</h1>
-        <table className='upper-table'>
-          <thead>
-              <th>Check in</th>
-              <th>Check-out</th>
-              <th>Subtotal</th>
-              <th>Room type</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{data.startDate}</td>
-              <td>{data.endDate}</td>
-              <td>£ {data.subtotal}</td>
-              <td>{data.roomType}</td>
-            </tr>
-          </tbody>
-        </table>
-        <br/>
-        <table className='lower-table'>
-          <thead>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Email</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{data.user.name}</td>
-              <td>{data.user.surname}</td>
-              <td>{data.user.email}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className='overflow'>
+          <table className='upper-table'>
+            <thead>
+                <th>Check in</th>
+                <th>Check-out</th>
+                <th>Subtotal</th>
+                <th>Room type</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{data.startDate}</td>
+                <td>{data.endDate}</td>
+                <td>£ {data.subtotal}</td>
+                <td>{data.roomType}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br/>
+          <table className='lower-table'>
+            <thead>
+              <th>Name</th>
+              <th>Surname</th>
+              <th>Email</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{data.user.name}</td>
+                <td>{data.user.surname}</td>
+                <td>{data.user.email}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <br/>
