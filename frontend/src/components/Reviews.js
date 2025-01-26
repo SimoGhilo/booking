@@ -46,9 +46,11 @@ function Reviews() {
 
     let previousPage = useSelector((state) => state.history.previousPage);
     let previousSearchTerm = useSelector((state) => state.history.searchTerm);
+    let previousDate = useSelector((state) => state.history.previousDate);
+    let previousGuests = useSelector((state) => state.history.previousGuests);
 
     function goBack(){
-      navigate(previousPage || '/search', { state: { searchTerm: previousSearchTerm } });
+      navigate(previousPage || '/search', { state: { searchTerm: previousSearchTerm, previousDate, previousGuests } });
     }
     
     if(reviews.length > 0){
@@ -89,6 +91,6 @@ function Reviews() {
     }
 }
 
-/** TODOs: logout, home page, fix history (Page navigation fixed, fix date and number of guests search term), final check media queries */
+/** TODOs: logout, home page, final check media queries */
 
 export default Reviews

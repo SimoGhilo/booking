@@ -16,9 +16,9 @@ function SearchBar() {
   /** Location.state comes from the child component */
 
   const [searchTerm, setSearchTerm] = useState(location.state?.searchTerm || ''); // Set funct also in child component (ViewProperties.js)
-  const [startDate, setStartDate] = useState(location.state?.previousDate.start || ''); // Set funct also in child component (ViewProperties.js)
-  const [endDate, setEndDate] = useState(location.state?.previousDate.end || ''); // Set funct also in child component (ViewProperties.js)
-  const [guests, setGuests] = useState(1);
+  const [startDate, setStartDate] = useState(location.state?.previousDate?.start || ''); // Set funct also in child component (ViewProperties.js)
+  const [endDate, setEndDate] = useState(location.state?.previousDate?.end || ''); // Set funct also in child component (ViewProperties.js)
+  const [guests, setGuests] = useState(location.state?.previousGuests || 1);
   const [isSearch, setIsSearch] = useState(false);
   const [preview, setPreview] = useState([]); 
   const [properties, setProperties] = useState([]);

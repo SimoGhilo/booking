@@ -120,8 +120,6 @@ function Review() {
 
       event.preventDefault();  
 
-      /** TODO: POST review, create route in API */
-
       let res = await fetch('http://localhost:5000/api/review/new', {
         method: 'POST',
         headers: {'content-type': 'application/json'},

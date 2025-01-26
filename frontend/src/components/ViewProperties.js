@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setPreviousPage, setSearchTerm, setPreviousDate } from './redux/historyReducer';
+import { setPreviousPage, setSearchTerm, setPreviousDate, setPreviousGuests } from './redux/historyReducer';
 
 function ViewProperties(props) {
 
@@ -174,6 +174,7 @@ async function redirectUser(propertyId) {
     dispatch(setPreviousPage('/search'));
     dispatch(setSearchTerm(props.searchTerm));
     dispatch(setPreviousDate({start, end}));
+    dispatch(setPreviousGuests(guests));
   if (isAuthenticated) {
     navigate('/book', { state: { propertyId, start, end, guests } }); // Passing propertyId as part of an object
   } else {
@@ -186,6 +187,8 @@ async function redirectUser(propertyId) {
 function redirectToReview(propertyId){
   dispatch(setPreviousPage('/search'));
   dispatch(setSearchTerm(props.searchTerm));
+  dispatch(setPreviousDate({start, end}));
+  dispatch(setPreviousGuests(guests));
   navigate(`/reviews/${propertyId}`);
 }
 
