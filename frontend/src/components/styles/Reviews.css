@@ -26,6 +26,26 @@
     font-size: smaller;
 }
 
+button.btn-outline-light {
+    background-color: #fff;
+    border: 2px solid #007bff;
+    color: #007bff;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button.btn-outline-light:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  button.btn-outline-light:active {
+    transform: scale(0.95);
+  }
+
 @media screen  and (max-width:460px) {
     .review-box{
         width: 98%;

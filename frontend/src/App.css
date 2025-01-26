@@ -463,9 +463,10 @@ body{
 
 
       .grid-section{
-        width: 90%;
-        margin-left: 5%;
+        /* width: 80%; */
+        margin-left: 20%;
         margin-right: 5%;
+        font-size: 0.75rem;
       }
 
 

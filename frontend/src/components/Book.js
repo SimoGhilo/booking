@@ -161,13 +161,13 @@ function Book() {
                 <p>Room type: {roomType}</p>
                 <p>Subtotal: £ {subtotal}</p>
               </div>
-            <button onClick={() => book()}>Confirm</button>
-            <button onClick={() => setShowModal(false)}>Close</button>
+            <button className='btn-outline-light' onClick={() => book()}>Confirm</button>
+            <button className='btn-outline-light' onClick={() => setShowModal(false)}>Close</button>
           </div>
         </div>
         )}
         <div className='cont-box'>
-          <button onClick={()=> goBack()}>Go back to search</button>
+          <button className='btn-outline-light' onClick={()=> goBack()}>Go back to search</button>
         </div>
         
         {info && (
@@ -229,7 +229,7 @@ function Book() {
                   <td><p>{r.room_type}</p></td>
                   <td><img className='icon' src={`${process.env.PUBLIC_URL}/icons/${srcIcon}`}  /></td>
                   <td><p>Subtotal £ {r.rate * Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)  )}</p></td>
-                  <td><button className="button" onClick={()=> {setShowModal(true); setChosenRate(r.id); setSubtotal(r.rate * Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)  )); setRoomType(r.room_type)}}>I will reserve</button></td>
+                  <td><button style={{width:150}} className='btn-outline-light' onClick={()=> {setShowModal(true); setChosenRate(r.id); setSubtotal(r.rate * Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)  )); setRoomType(r.room_type)}}>I will reserve</button></td>
                 </tr>
               )
               })

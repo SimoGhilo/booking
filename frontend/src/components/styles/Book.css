@@ -108,6 +108,26 @@ p{
     overflow-y: auto; /* Adds scroll for large content */
   }
 
+  button.btn-outline-light {
+    background-color: #fff;
+    border: 2px solid #007bff;
+    color: #007bff;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button.btn-outline-light:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  button.btn-outline-light:active {
+    transform: scale(0.95);
+  }
+
 
 /* @media (max-width: 480px) {
     .modal-overlay {
@@ -141,6 +161,10 @@ p{
     .flex{
         align-items: center;
         justify-content: center;
+    }
+
+    table{
+        font-size:0.75rem;
     }
 
     /*Modal*/

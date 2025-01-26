@@ -266,8 +266,8 @@ function redirectToReview(propertyId){
                     <p>Price per night £{r.rate}</p>
                   </div>
                 ))}
-                <button className="btn btn-book" onClick={() => redirectUser(p.id)}>Book</button>
-                <button className="btn btn-book" onClick={()=> redirectToReview(p.id)}><small>Reviews</small></button>
+                <button className="btn-outline-light" style={{width:150}} onClick={() => redirectUser(p.id)}>Book</button>
+                <button className="btn-outline-light" style={{width:150}} onClick={()=> redirectToReview(p.id)}><small>Reviews</small></button>
               </div>
             </div>
           );

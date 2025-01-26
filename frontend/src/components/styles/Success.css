@@ -37,6 +37,26 @@
     width:20%
 }
 
+button.btn-outline-light {
+    background-color: #fff;
+    border: 2px solid #007bff;
+    color: #007bff;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button.btn-outline-light:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  button.btn-outline-light:active {
+    transform: scale(0.95);
+  }
+
 @media screen and (max-width:1025px){
     .Booking-Resume{
         flex-direction: column;
@@ -48,11 +68,11 @@
         padding:1rem;
     }
 
-    img{
+    #imageSuccess{
         display: none;
     }
 
-    .overflow{
+    .overflowTwo{
         overflow-x: scroll;
         border:3px lightgray solid;
         width:20rem;

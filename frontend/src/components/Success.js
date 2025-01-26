@@ -47,11 +47,11 @@ function Success() {
   return (
   <>
     <div className='Booking-Resume'>
-      <img src={`${process.env.PUBLIC_URL}/roomImages/${data.info[0].src}`} />
+      <img id="imageSuccess" src={`${process.env.PUBLIC_URL}/roomImages/${data.info[0].src}`} />
       <br/>
       <div className='content'>
         <h1>Your booking at {data.info[0].name}</h1>
-        <div className='overflow'>
+        <div className='overflowTwo'>
           <table className='upper-table'>
             <thead>
                 <th>Check in</th>
@@ -88,8 +88,8 @@ function Success() {
     </div>
     <br/>
     <div className='button-container'>
-      <button onClick={()=> navigate('/dashboard')}>Back to dashboard</button>
-      <button onClick={()=> navigate('/')}>Back to Home</button>
+      <button className='btn-outline-light' onClick={()=> navigate('/dashboard')}>Back to dashboard</button>
+      <button className='btn-outline-light' onClick={()=> navigate('/')}>Back to Home</button>
     </div>
   </>
   )

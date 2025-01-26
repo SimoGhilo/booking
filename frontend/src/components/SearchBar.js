@@ -133,7 +133,7 @@ function SearchBar() {
           }}/>
           <div class="guests-box">
               <p>Guests ?</p>
-              <button className='btn btn-primary plusminus' onClick={(event) => {
+              <button className='btn-outline-light' onClick={(event) => {
                 event.preventDefault();
                  if(guests <= 1)
                   {
@@ -141,7 +141,7 @@ function SearchBar() {
                   }
               }}>+</button>
               <p className='guestsP'>{guests}</p>
-              <button className='btn btn-primary plusminus' onClick={(event) => {
+              <button className='btn-outline-light' onClick={(event) => {
                 event.preventDefault();
                  if(guests > 1)
                   {

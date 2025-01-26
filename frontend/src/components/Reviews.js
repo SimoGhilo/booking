@@ -57,7 +57,7 @@ function Reviews() {
         return (
             <>
             <div className='cont-box'>
-            <button onClick={()=> goBack()}>Go back to search</button>
+            <button className='btn-outline-light' onClick={()=> goBack()}>Go back to search</button>
             </div>
             <div className='outer-box'>
                 <h1>Reviews for {reviews[0].name}</h1>
@@ -85,12 +85,12 @@ function Reviews() {
         return (
             <div>
                 <p>No review Available for this hotel</p>
-                <button onClick={()=> goBack()}>Go back to search</button>
+                <button className='btn-outline-light' onClick={()=> goBack()}>Go back to search</button>
             </div>
         )
     }
 }
 
-/** TODOs: logout, home page, final check media queries, cancel booking */
+/** TODOs: logout, home page, cancel booking, final check media q. */
 
 export default Reviews
