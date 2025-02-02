@@ -9,8 +9,9 @@ function Dashboard() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
-
     const [bookings, setBookings] = useState([]);
+    const [showModal, setShowModal] = useState(false); 
+    const [bookingToCancel, setBookingToCancel] = useState(null);
 
 
     // utility today's date to display the bookings
@@ -100,6 +101,7 @@ function Dashboard() {
           method: 'DELETE'
         });
         await getBookings();
+        closeModal();
         return result.json();
       } catch (error) {
         console.log(error, 'error');
@@ -123,6 +125,18 @@ function Dashboard() {
 
   function redirectToReview(booking_id){
     navigate('/review', { state: { from: window.location.pathname, data:  { user, booking_id } }})
+  }
+
+  // Function to show the modal when cancel button is clicked
+  function handleCancelClick(bookingId) {
+    setBookingToCancel(bookingId);  // Set the booking ID to cancel
+    setShowModal(true);  // Show the modal
+  }
+
+  // Function to close the modal
+  function closeModal() {
+    setShowModal(false);
+    setBookingToCancel(null);
   }
 
 
@@ -170,7 +184,7 @@ function Dashboard() {
                             <p className='text-box'>{booking.hotelName}</p>
                           </div>
                           <img src={`${process.env.PUBLIC_URL}/roomImages/${booking.src}`}/>
-                          <button className='btn-outline-red' onClick={()=> cancelBooking(booking.id)}>Cancel</button>
+                          <button className='btn-outline-red' onClick={()=> handleCancelClick(booking.id)}>Cancel</button>
                           <div>
                             <p>{booking.start_date.slice(0,10)}</p>
                             <p>{booking.end_date.slice(0,10)}</p>
@@ -181,6 +195,17 @@ function Dashboard() {
                   } 
                 })}
             </div>
+            {showModal && (
+              <div className="modal-overlay" id="modal-overlay">
+                <div className="modal" id="modal">
+                  <h2 className='font-modal'>Are you sure you want to cancel this booking?</h2>
+                  <div className="modal-actions">
+                    <button className="btn-outline-light" onClick={() => cancelBooking(bookingToCancel)}>Yes, cancel</button>
+                    <button className="btn-outline-red" onClick={closeModal}>No, go back</button>
+                  </div>
+                </div>
+              </div>
+            )}
           </>
           )
       } 

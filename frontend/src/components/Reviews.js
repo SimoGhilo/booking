@@ -91,6 +91,6 @@ function Reviews() {
     }
 }
 
-/** TODOs: home page, cancel booking, final check media q., sort out modal styles */
+/** TODOs: home page, final check media queries, sort out modal styles */
 
 export default Reviews
