@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, redirect } from 'react-router-dom';
 import './styles/Dashboard.css';
 
 function Dashboard() {
@@ -51,6 +51,26 @@ function Dashboard() {
 
     /** End auth check */
 
+    /**Log out */
+
+    async function logout() {
+      try {
+        const response = await fetch('http://localhost:5000/api/logout', {
+          method: 'GET',
+          credentials: 'include' 
+        });
+    
+        if (!response.ok) {
+          throw new Error(`Logout failed: ${response.statusText}`);
+        }
+    
+        navigate('/login');
+      } catch (error) {
+        console.error('Error during logout:', error);
+      }
+    }
+    
+
     /** API call to fetch all bookings for the given user */
 
     async function fetchBookings(user_id) {
@@ -97,6 +117,7 @@ function Dashboard() {
             <div className='container-trips'>
                 <h1>Welcome, {user.name}</h1>
                 <h4>Bookings & Trips</h4>
+                <button className='btn-outline-red' onClick={()=> logout()}>Log out</button>
                 <br/>
                 <h1>Past trips</h1>
                 {bookings.map((booking) => {
@@ -132,7 +153,7 @@ function Dashboard() {
                             <p className='text-box'>{booking.hotelName}</p>
                           </div>
                           <img src={`${process.env.PUBLIC_URL}/roomImages/${booking.src}`}/>
-                          <button className='btn-outline-light'>Cancel</button>
+                          <button className='btn-outline-red'>Cancel</button>
                           <div>
                             <p>{booking.start_date.slice(0,10)}</p>
                             <p>{booking.end_date.slice(0,10)}</p>

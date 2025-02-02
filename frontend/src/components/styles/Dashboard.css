@@ -63,6 +63,27 @@
   button.btn-outline-light:active {
     transform: scale(0.95);
   }
+
+  button.btn-outline-red {
+    background-color: #fff;
+    border: 2px solid #ff2525;
+    color: #ff2525;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    width:auto;
+    transition: all 0.3s ease;
+  }
+  
+  button.btn-outline-red:hover {
+    background-color: #ff2525;
+    color: #fff;
+  }
+  
+  button.btn-outline-red:active {
+    transform: scale(0.95);
+  }
   
   .container-trips h1 {
     font-size: 2rem;

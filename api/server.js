@@ -26,11 +26,16 @@ const bcrypt = require('bcryptjs');
 
 // Session configuration  
 app.use(session({
-    secret: 'somesecret',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } 
-  }));
+  secret: 'somesecret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { 
+    secure: false, // Set to true when using HTTPS
+    httpOnly: true, // Prevent access from client-side scripts
+    sameSite: 'lax' // Helps with CSRF protection
+  }
+}));
+
   
   // Passport JS
   const passport = require('./passport'); 
@@ -151,13 +156,28 @@ app.post('/api/login', (req, res, next) => {
 });
 
 
-// Logout route
-app.get('/logout', (req, res) => {
+//logout
+app.get('/api/logout', (req, res, next) => {
   req.logout((err) => {
     if (err) return next(err);
-    res.redirect('/login');
+
+    req.session.destroy((err) => {
+      if (err) return next(err);
+
+      // Clear the session cookie (adjust the name if different)
+      res.clearCookie('connect.sid', {
+        path: '/',
+        httpOnly: true,
+        secure: false, // Set to true if using HTTPS
+        sameSite: 'lax',
+      });
+
+      res.status(200).json({ message: 'Logged out successfully' });
+    });
   });
 });
+
+
 
 
 
