@@ -37,6 +37,18 @@ router.get('/:user_id', async (req, res) => {
     }
   });
 
+  /**DELETE */
+
+  router.delete('/booking/cancel/:booking_id', async (req, res) => {
+    try {
+      await pool.query(`DELETE FROM reservations where id = ${req.params.booking_id}`);
+      res.status(200).json({ message: `Resource with ID ${req.params.booking_id} deleted successfully` });
+    } catch (error) {
+      console.error('Error fetching reservations:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
   /** POST */
 
   router.post('/book', async (req,res) => {

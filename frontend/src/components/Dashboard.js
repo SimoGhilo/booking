@@ -89,16 +89,33 @@ function Dashboard() {
       
     }
 
+    /** Cancel given booking */
+
+    async function cancelBooking(bookingId){
+
+      if(!bookingId) return null;
+
+      try {
+        let result = await fetch(`http://localhost:5000/api/reservations/booking/cancel/${bookingId}`, {
+          method: 'DELETE'
+        });
+        await getBookings();
+        return result.json();
+      } catch (error) {
+        console.log(error, 'error');
+      }
+    }
+
     /** Below use effect is to load all the bookings for the given user */
 
-    useEffect(() => {
-      async function getBookings() {
-          if (user && user.id) { // Ensure user.id exists
-              const data = await fetchBookings(user.id);
-              setBookings(data);
-          }
+    async function getBookings() {
+      if (user && user.id) { // Ensure user.id exists
+          const data = await fetchBookings(user.id);
+          setBookings(data);
       }
+  }
 
+    useEffect(() => {
       getBookings(); // Call the function directly
   }, [user]); 
 
@@ -153,7 +170,7 @@ function Dashboard() {
                             <p className='text-box'>{booking.hotelName}</p>
                           </div>
                           <img src={`${process.env.PUBLIC_URL}/roomImages/${booking.src}`}/>
-                          <button className='btn-outline-red'>Cancel</button>
+                          <button className='btn-outline-red' onClick={()=> cancelBooking(booking.id)}>Cancel</button>
                           <div>
                             <p>{booking.start_date.slice(0,10)}</p>
                             <p>{booking.end_date.slice(0,10)}</p>
